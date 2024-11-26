@@ -10,6 +10,8 @@ import {CovalentHighlightModule} from "@covalent/highlight";
 import {CovalentLayoutModule} from "@covalent/core/layout";
 import {CovalentMessageModule} from "@covalent/core/message";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatCardTitle} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -24,9 +26,12 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CovalentMarkdownModule,
     CovalentFlavoredMarkdownModule,
     CovalentDynamicFormsModule,
-    CovalentMessageModule
+    CovalentMessageModule,
+    MatCardTitle
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
