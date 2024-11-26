@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-import {catchError, map, Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {QuestionnaireResponse} from "fhir/r4";
+import Client from "fhirclient/lib/Client";
+
+declare var LForms: any;
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,9 @@ export class AppComponent implements OnInit {
               private http: HttpClient) {
   }
 
-  questionnaire: string | undefined;
+  ctx: Client | undefined
+
+  @ViewChild('myFormContainer', {static: false}) mydiv: ElementRef | undefined;
 
   ngOnInit() {
 
@@ -37,8 +42,28 @@ export class AppComponent implements OnInit {
       if (data.type == 'cors') {
         data.json().then(data2 => {
           console.log(data2)
+          this.populateQuestionnaireNoPopulation(data2)
         })
       }
     })
   }
+
+  populateQuestionnaireNoPopulation(questionnaire : any) {
+    LForms.Util.setFHIRContext(this.ctx)
+    let formDef = LForms.Util.convertFHIRQuestionnaireToLForms(questionnaire, "R4");
+    var newFormData = (new LForms.LFormsData(formDef));
+    try {
+      const qr : QuestionnaireResponse = {
+        resourceType: "QuestionnaireResponse", status: 'in-progress'
+
+      }
+      formDef = LForms.Util.mergeFHIRDataIntoLForms('QuestionnaireResponse', qr, newFormData, "R4");
+
+      LForms.Util.addFormToPage(formDef, this.mydiv?.nativeElement, {prepopulate: false});
+    } catch (e) {
+      console.log(e)
+      formDef = null;
+    }
+  }
+
 }

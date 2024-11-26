@@ -24,6 +24,8 @@
     "@covalent/highlight": "^8.23.2",
     "@covalent/markdown": "^8.23.2",
     "@covalent/tokens": "^8.23.2",
+    "@types/fhir": "^0.0.41",
+    "fhirclient": "^2.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
