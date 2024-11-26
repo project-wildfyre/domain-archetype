@@ -11,14 +11,15 @@ import {CovalentLayoutModule} from "@covalent/core/layout";
 import {CovalentMessageModule} from "@covalent/core/message";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {MatCard, MatCardHeader, MatCardModule, MatCardTitle} from "@angular/material/card";
-import {MatTab, MatTabGroup, MatTabsModule} from "@angular/material/tabs";
 import { LhcFormComponent } from './lhc-form/lhc-form.component';
 import { FormDetailComponent } from './form-detail/form-detail.component';
-import {MatTree, MatTreeModule, MatTreeNode, MatTreeNodePadding, MatTreeNodeToggle} from "@angular/material/tree";
-import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {MatTreeModule, MatTreeNode, MatTreeNodePadding, MatTreeNodeToggle} from "@angular/material/tree";
+import { MatIconModule} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import { FormDetailNodeComponent } from './form-detail-node/form-detail-node.component';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FormDetailNodeComponent } from './form-detail-node/form-detail-node.com
         MatCardModule,
         MatTreeModule,
         MatIconModule,
-        MatIconButton
+        MatIconButton,
+        MatChipsModule
     ],
   providers: [
     provideAnimationsAsync()

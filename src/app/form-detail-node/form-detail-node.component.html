@@ -1,4 +1,14 @@
-<div flex layout="row" layout-align="center center">
-    <span flex-auto>{{item?.text}} {{ getCoded(item) }} </span>
-    <span flex>{{getAnswer(item)}}</span>
+<div layout="row" style="width: 100%">
+    <span style="width: 50%">{{item?.text}} <a *ngIf="getCoded(item) !== ''" target="_blank" [href]="'http://snomed.info/id/'+getCoded(item)"> {{ getCoded(item) }} </a> </span>
+    <span style="width: 50%">
+        <span *ngIf="hasAnswerType(item) || item?.initial !== undefined">
+             &nbsp;
+             Answer: <mat-chip>{{ item?.type }}</mat-chip>
+             {{getAnswer(item)}}
+        </span>
+        <span *ngIf="getUnits(item) !== ''">
+            &nbsp;
+            Units: <mat-chip>{{getUnits(item)}}</mat-chip>
+        </span>
+        </span>
 </div>
