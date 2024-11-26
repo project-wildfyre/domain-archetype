@@ -14,7 +14,7 @@
 // Define a custom typography config that overrides the font-family
 // or any typography level.
 $typography: mat.define-typography-config(
-  $font-family: 'Inter, monospace',
+  $font-family: 'Roboto, monospace',
   $headline-1: mat.define-typography-level(32px, 48px, 700),
 );
 

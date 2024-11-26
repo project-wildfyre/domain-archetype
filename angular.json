@@ -37,8 +37,12 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "node_modules/@covalent/core/common/platform.css",
+                "bundleName": "covalent-styles",
+                "inject": true
+              }
             ],
             "scripts": []
           },
