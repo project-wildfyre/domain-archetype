@@ -1,14 +1,60 @@
-<div layout="row" style="width: 100%">
-    <span style="width: 50%">{{item?.text}} <a *ngIf="getCoded(item) !== ''" target="_blank" [href]="'http://snomed.info/id/'+getCoded(item)"> {{ getCoded(item) }} </a> </span>
-    <span style="width: 50%">
-        <span *ngIf="hasAnswerType(item) || item?.initial !== undefined">
-             &nbsp;
-             Answer: <mat-chip>{{ item?.type }}</mat-chip>
-             {{getAnswer(item)}}
-        </span>
-        <span *ngIf="getUnits(item) !== ''">
-            &nbsp;
-            Units: <mat-chip>{{getUnits(item)}}</mat-chip>
-        </span>
-        </span>
-</div>
+<mat-expansion-panel (opened)="panelOpenState = true"
+                     (closed)="panelOpenState = false" xmlns="http://www.w3.org/1999/html">
+    <mat-expansion-panel-header>
+      <mat-panel-title >
+        {{item?.prefix}}&nbsp;{{item?.text}}
+      </mat-panel-title>
+      <mat-panel-description>
+          <span>
+              <mat-chip-set aria-label="Item Type">
+                 <!-- <span *ngIf="item?.type !== undefined && (item?.type == 'group' || !panelOpenState)"> -->
+                   <mat-chip>{{ item?.type }}</mat-chip>
+                  <span *ngFor="let when of item?.enableWhen">
+                            Enable when {{getQuestion(when.question)}}&nbsp;{{when.operator}}&nbsp;{{when.answerBoolean}}
+                            <br/>
+                        </span>
+                   <span *ngIf="item?.required !== undefined && item?.required">
+                          <mat-chip style="background-color: #feebeb">Required</mat-chip>
+                  </span>
+                  <span *ngIf="item?.repeats !== undefined && item?.repeats">
+                          <mat-chip>Repeats</mat-chip>
+                  </span>
+              </mat-chip-set>
+           </span>
+        <span></span>
+
+      </mat-panel-description>
+
+            <span *ngIf="hasAnswerType(item) || item?.initial !== undefined">
+              {{getAnswer(item)}}
+            </span>
+            <span *ngIf="item?.readOnly">
+                            <mat-chip>read only</mat-chip>
+                        </span>
+          <span *ngIf="item?.maxLength != undefined">
+                            <mat-chip>max length = {{item?.maxLength}}</mat-chip>
+                        </span>
+          <span *ngIf="getUnits(item) !== ''">
+              &nbsp;
+              Units: <mat-chip>{{getUnits(item)}}</mat-chip>
+          </span>
+    </mat-expansion-panel-header>
+  <div style="width: 50%"></div>
+    <table style="width: 50%">
+
+    <tr *ngIf="item?.code !== undefined">
+        <td>Question Coding</td>
+        <td>
+        <li *ngFor="let code of item?.code">
+           <a *ngIf="code.system == 'http://snomed.info/sct'" target="_blank" [href]="'http://snomed.info/id/'+getCoded(item)">SNOMED CT {{ getCoded(item) }} </a>
+           <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+getCoded(item)">LOINC {{ getCoded(item) }} </a>
+        </li>
+        </td>
+      </tr>
+      <tr>
+        <td>link Id</td>
+        <td>{{item?.linkId}}</td>
+      </tr>
+    </table>
+
+  </mat-expansion-panel>

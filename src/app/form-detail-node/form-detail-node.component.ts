@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {QuestionnaireItem} from "fhir/r4";
+import {Questionnaire, QuestionnaireItem} from "fhir/r4";
 
 @Component({
   selector: 'app-form-detail-node',
@@ -9,11 +9,18 @@ import {QuestionnaireItem} from "fhir/r4";
 export class FormDetailNodeComponent {
 
   item: QuestionnaireItem | undefined;
+  questionnaire: Questionnaire | undefined;
+  panelOpenState = false;
 
   @Input()
-  set itemnode(item: QuestionnaireItem) {
+  set setItem(item: QuestionnaireItem) {
     this.item = item;
   }
+  @Input()
+  set setQuestionnaire(questionnaire: Questionnaire) {
+    this.questionnaire = questionnaire;
+  }
+
   getAnswer(item: QuestionnaireItem | undefined) {
     var retStr = ""
     if (item !== undefined && item.answerValueSet !== undefined) {
@@ -49,5 +56,27 @@ export class FormDetailNodeComponent {
       })
     }
     return units;
+  }
+
+  getQuestion(question: string) {
+    if (this.questionnaire !== undefined) {
+       return this.getQuestionItem(question, this.questionnaire.item)
+    }
+    return "";
+  }
+  getQuestionItem(question: string,items?: QuestionnaireItem[]) {
+    if (items == undefined) return undefined
+    var answer : string | undefined
+    items.forEach(item => {
+      if (answer == undefined) {
+        if (question === item.linkId) {
+          if (item.prefix !== undefined) answer = item.prefix + " " + item.text
+          else answer = item.text
+        } else {
+          if (item.item !== undefined) answer = this.getQuestionItem(question, item.item)
+        }
+      }
+    })
+    return answer
   }
 }

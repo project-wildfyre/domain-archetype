@@ -1,29 +1,34 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            <h2 mat-card-title>Form Preview</h2>
+            <h1 mat-card-title>Data Capture Form Preview: {{questionnaire?.title}}</h1>
         </mat-card-title>
     </mat-card-header>
-
-<td-message
-  label="Information"
-  sublabel="Proof of concept"
-  color="accent"
-  icon="information"
-></td-message>
-
-<mat-tab-group (selectedTabChange)="changedTab($event)">
-    <mat-tab label="Detail">
-        <span *ngIf="currentTab == 0 && questionnaire !== null">
-            <app-form-detail [formDefinition]="questionnaire"></app-form-detail>
+  <mat-card-content>
+      <span *ngIf="questionnaire?.description !== undefined">
+        <h3>Description</h3>
+        <td-markdown [content]="getDescription()"></td-markdown>
         </span>
-    </mat-tab>
-    <mat-tab label="Preview">
-         <span *ngIf="currentTab == 1 && questionnaire !== null">
-             <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
-         </span>
-    </mat-tab>
+    <td-message
+      label="Information"
+      sublabel="Proof of concept"
+      color="accent"
+      icon="information"
+    ></td-message>
 
-</mat-tab-group>
+    <mat-tab-group (selectedTabChange)="changedTab($event)">
+        <mat-tab label="Detail">
+            <span *ngIf="currentTab == 0 && questionnaire !== null">
+                <app-form-detail [formDefinition]="questionnaire"></app-form-detail>
+            </span>
+        </mat-tab>
+        <mat-tab label="Preview">
+             <span *ngIf="currentTab == 1 && questionnaire !== null">
+                 <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
+             </span>
+        </mat-tab>
+
+    </mat-tab-group>
+  </mat-card-content>
 </mat-card>
 

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {DomSanitizer} from "@angular/platform-browser";
-import {HttpClient} from "@angular/common/http";
 import {MatTabChangeEvent} from "@angular/material/tabs";
+import {Questionnaire} from "fhir/r4";
 
 
 
@@ -16,11 +15,9 @@ import {MatTabChangeEvent} from "@angular/material/tabs";
 export class AppComponent implements OnInit {
   title = 'questionnaire-viewer';
 
-  constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-              private http: HttpClient) {
+  constructor(private route: ActivatedRoute) {
   }
-  questionnaire : any;
+  questionnaire : Questionnaire | undefined;
 
   currentTab = 0;
 
@@ -40,7 +37,7 @@ export class AppComponent implements OnInit {
       if (data.type == 'cors') {
         data.json().then(data2 => {
           console.log(data2)
-          this.questionnaire= data2
+          this.questionnaire = data2
         })
       }
     })
@@ -52,4 +49,8 @@ export class AppComponent implements OnInit {
     this.currentTab = event.index
   }
 
+  getDescription() {
+    if (this.questionnaire !== undefined && this.questionnaire.description !== undefined) return this.questionnaire.description
+    return "";
+  }
 }

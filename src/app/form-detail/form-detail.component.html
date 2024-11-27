@@ -1,9 +1,9 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <app-form-detail-node [itemnode]="node.data"></app-form-detail-node>
+        <app-form-detail-node [setItem]="node.data" [setQuestionnaire]="questionnaire"></app-form-detail-node>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
     <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
@@ -13,7 +13,7 @@
                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
         </button>
-        <app-form-detail-node [itemnode]="node.data"></app-form-detail-node>
+        <app-form-detail-node [setItem]="node.data" [setQuestionnaire]="questionnaire"></app-form-detail-node>
     </mat-tree-node>
 </mat-tree>
 

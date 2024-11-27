@@ -20,6 +20,8 @@ import { FormDetailNodeComponent } from './form-detail-node/form-detail-node.com
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatCardModule} from "@angular/material/card";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
@@ -28,23 +30,25 @@ import {MatCardModule} from "@angular/material/card";
     FormDetailComponent,
     FormDetailNodeComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        CovalentLayoutModule,
-        CovalentHighlightModule,
-        CovalentMarkdownModule,
-        CovalentFlavoredMarkdownModule,
-        CovalentDynamicFormsModule,
-        CovalentMessageModule,
-        MatTabsModule,
-        MatCardModule,
-        MatTreeModule,
-        MatIconModule,
-        MatIconButton,
-        MatChipsModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    CovalentLayoutModule,
+    CovalentHighlightModule,
+    CovalentMarkdownModule,
+    CovalentFlavoredMarkdownModule,
+    CovalentDynamicFormsModule,
+    CovalentMessageModule,
+    MatTabsModule,
+    MatCardModule,
+    MatTreeModule,
+    MatIconModule,
+    MatIconButton,
+    MatChipsModule,
+    MatExpansionModule,
+    MatTableModule,
+  ],
   providers: [
     provideAnimationsAsync()
   ],
