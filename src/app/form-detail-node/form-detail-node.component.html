@@ -19,6 +19,15 @@
                   <span *ngIf="item?.repeats !== undefined && item?.repeats">
                           <mat-chip>Repeats</mat-chip>
                   </span>
+                  <span *ngIf="item?.type == 'choice' && item?.code == undefined">
+                      <mat-icon color="accent">warning</mat-icon> No code
+                  </span>
+                  <span *ngIf="answersNotSNOMED(item)">
+                      <mat-icon color="accent">warning</mat-icon> Answers are not SNOMED
+                  </span>
+                  <span *ngIf="answersContainLOINC(item)">
+                      <mat-icon color="accent">information</mat-icon> Answers contain LOINC
+                  </span>
               </mat-chip-set>
            </span>
         <span></span>

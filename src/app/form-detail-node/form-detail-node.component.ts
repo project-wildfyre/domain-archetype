@@ -222,4 +222,26 @@ TX Text Data (Display)
     return str
   }
 
+  answersNotSNOMED(item: QuestionnaireItem | undefined) {
+    if (item == undefined || item.answerOption == undefined) return false
+    var answer = false
+    item.answerOption.forEach(option => {
+      if (option.valueCoding !== undefined) {
+         if (option.valueCoding.system == undefined) answer = true
+        if (option.valueCoding.system !== 'http://snomed.info/sct') answer = true
+      }
+    })
+    return answer
+  }
+
+  answersContainLOINC(item: QuestionnaireItem | undefined) {
+    if (item == undefined || item.answerOption == undefined) return false
+    var answer = false
+    item.answerOption.forEach(option => {
+      if (option.valueCoding !== undefined) {
+        if (option.valueCoding.system !== undefined && option.valueCoding.system == 'http://loinc.org') answer = true
+      }
+    })
+    return answer
+  }
 }
