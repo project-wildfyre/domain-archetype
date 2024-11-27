@@ -39,8 +39,8 @@
               Units: <mat-chip>{{getUnits(item)}}</mat-chip>
           </span>
     </mat-expansion-panel-header>
-  <div style="width: 50%"></div>
-    <table style="width: 50%">
+
+    <table style="width: 100%">
 
     <tr *ngIf="item?.code !== undefined">
         <td>Question Coding</td>
@@ -55,6 +55,24 @@
         <td>link Id</td>
         <td>{{item?.linkId}}</td>
       </tr>
-    </table>
+
+
+    <tr *ngIf="item?.definition !== undefined">
+      <td>HL7 FHIR Resource Mapping</td>
+      <td>
+        <pre>{{getFHIR(item)}}</pre>
+      </td>
+    </tr>
+    <tr *ngIf="item?.definition !== undefined">
+      <td>HL7 v2 Segment Mapping (2.5.1)</td>
+      <td>
+        OBX-2 Value Type <br/><br/>
+        <pre>{{getHL7v2OBX2(item)}}</pre>
+        OBX-3 Observation Identifier<br/><br/>
+        <pre>{{getHL7v2OBX3(item)}}</pre>
+
+      </td>
+    </tr>
+  </table>
 
   </mat-expansion-panel>

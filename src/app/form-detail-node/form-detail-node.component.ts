@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Questionnaire, QuestionnaireItem} from "fhir/r4";
+import {CodeableConcept, Observation, Questionnaire, QuestionnaireItem} from "fhir/r4";
 
 @Component({
   selector: 'app-form-detail-node',
@@ -79,4 +79,97 @@ export class FormDetailNodeComponent {
     })
     return answer
   }
+
+  getFHIR(item: QuestionnaireItem | undefined) {
+    if (item == undefined) return "";
+    if (item.code == undefined) return ""
+    var concept: CodeableConcept = {
+      coding : item.code
+    }
+    var observation :Observation = {
+      resourceType: "Observation",
+      status: "final",
+      code: concept
+    }
+    if (item.definition?.includes("valueQuantity")) {
+      observation.valueQuantity = {
+        "value": 0.0,
+          "system": "http://unitsofmeasure.org",
+          "code": this.getUnits(item)
+      }
+    }
+    if (item.definition?.includes("valueBoolean")) {
+      observation.valueBoolean = true
+    }
+    if (item.definition?.includes("valueCodeableConcept")) {
+      observation.valueCodeableConcept = {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "{{selectedCode}}",
+              "display": "The display term for the selected code"
+            }
+          ]
+        }
+
+    }
+    return JSON.stringify(observation, undefined, 4);
+  }
+
+  getHL7v2OBX3(item: QuestionnaireItem | undefined) {
+    if (item == undefined) return "";
+    if (item.code == undefined) return ""
+    var obx3=""
+    item.code.forEach( code => {
+        if (code.system == "http://snomed.info/sct") {
+          if (obx3 !== '') obx3 += "~"
+          obx3 += code.code + "^" + this.getString(code.display) + "^SNM"
+        }
+        if (code.system == "http://loinc.org") {
+          if (obx3 !== '') obx3 += "~"
+          obx3 += code.code + "^" + this.getString(code.display) + "^LN"
+        }
+      }
+    )
+    return obx3;
+  }
+
+  getHL7v2OBX2(item: QuestionnaireItem | undefined) {
+    if (item == undefined) return "";
+    var obx2=""
+
+    /*
+
+    https://hl7-definition.caristix.com/v2/HL7v2.5.1/Tables/0125
+
+CE Coded Entry
+DT Date
+ED FT Encapsulated Data
+Formatted Text (Display)
+NM Numeric
+RP Reference Pointer
+SN Structured Numeric
+ST String Data.
+TM Time
+TS Time Stamp (Date & Time)
+TX Text Data (Display)
+     */
+
+    if (item.type == 'choice') {
+      return "CE"
+    }
+    if (item.type == 'string') {
+      return "ST"
+    }
+    if (item.type == 'quantity') {
+      return "NM"
+    }
+    return obx2;
+  }
+
+  getString(str:string|undefined) {
+    if (str == undefined) return ""
+    return str
+  }
+
 }
