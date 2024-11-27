@@ -22,6 +22,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MatTableModule} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -30,25 +31,26 @@ import { MatTableModule} from "@angular/material/table";
     FormDetailComponent,
     FormDetailNodeComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    CovalentLayoutModule,
-    CovalentHighlightModule,
-    CovalentMarkdownModule,
-    CovalentFlavoredMarkdownModule,
-    CovalentDynamicFormsModule,
-    CovalentMessageModule,
-    MatTabsModule,
-    MatCardModule,
-    MatTreeModule,
-    MatIconModule,
-    MatIconButton,
-    MatChipsModule,
-    MatExpansionModule,
-    MatTableModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        CovalentLayoutModule,
+        CovalentHighlightModule,
+        CovalentMarkdownModule,
+        CovalentFlavoredMarkdownModule,
+        CovalentDynamicFormsModule,
+        CovalentMessageModule,
+        MatTabsModule,
+        MatCardModule,
+        MatTreeModule,
+        MatIconModule,
+        MatIconButton,
+        MatChipsModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatPaginator,
+    ],
   providers: [
     provideAnimationsAsync()
   ],

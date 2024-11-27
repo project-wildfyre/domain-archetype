@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {CodeableConcept, Observation, Questionnaire, QuestionnaireItem} from "fhir/r4";
+import {CodeableConcept, Observation, Questionnaire, QuestionnaireItem, QuestionnaireItemAnswerOption} from "fhir/r4";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-form-detail-node',
@@ -11,10 +12,27 @@ export class FormDetailNodeComponent {
   item: QuestionnaireItem | undefined;
   questionnaire: Questionnaire | undefined;
   panelOpenState = false;
+  private applyPaginator: boolean = false;
+  displayedColumns: string[] = ['initial', 'display', 'code',  'codesystem'];
+  // @ts-ignore
+  dataSource: MatTableDataSource<QuestionnaireItemAnswerOption>;
 
   @Input()
   set setItem(item: QuestionnaireItem) {
     this.item = item;
+    if (item.answerOption !== undefined) {
+
+      for (let entry of item.answerOption) {
+        if (entry.valueString !== undefined) {
+          entry.valueCoding = {
+            display: entry.valueString
+          }
+          entry.valueString = undefined
+        }
+      }
+      this.dataSource = new MatTableDataSource<QuestionnaireItemAnswerOption>(this.item.answerOption)
+      this.applyPaginator = true
+    }
   }
   @Input()
   set setQuestionnaire(questionnaire: Questionnaire) {
@@ -25,8 +43,7 @@ export class FormDetailNodeComponent {
     var retStr = ""
     if (item !== undefined && item.answerValueSet !== undefined) {
         var valueSet = decodeURI(item.answerValueSet).split('ecl')
-        retStr = "ecl = " + valueSet[1].replace('%2F','').replace('+',' ')
-
+        if (valueSet.length> 1) retStr = "ecl = " + valueSet[1].replace('%2F','').replace('+',' ')
     }
     return retStr;
   }
@@ -98,8 +115,11 @@ export class FormDetailNodeComponent {
           "code": this.getUnits(item)
       }
     }
-    if (item.definition?.includes("valueBoolean")) {
+    if (item.definition?.includes("valueBoolean") || item.type == 'boolean') {
       observation.valueBoolean = true
+    }
+    if (item.definition?.includes("valueInteger") || item.type == 'integer') {
+      observation.valueInteger = 12345
     }
     if (item.definition?.includes("valueCodeableConcept")) {
       observation.valueCodeableConcept = {
@@ -161,7 +181,7 @@ TX Text Data (Display)
     if (item.type == 'string') {
       return "ST"
     }
-    if (item.type == 'quantity') {
+    if (item.type == 'quantity' || item.type == 'integer') {
       return "NM"
     }
     return obx2;
