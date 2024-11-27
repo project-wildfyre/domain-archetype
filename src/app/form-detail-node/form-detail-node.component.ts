@@ -123,11 +123,11 @@ export class FormDetailNodeComponent {
     item.code.forEach( code => {
         if (code.system == "http://snomed.info/sct") {
           if (obx3 !== '') obx3 += "~"
-          obx3 += code.code + "^" + this.getString(code.display) + "^SNM"
+          obx3 += code.code + "^" + this.getDisplayTerm(code.display) + "^SNM"
         }
         if (code.system == "http://loinc.org") {
           if (obx3 !== '') obx3 += "~"
-          obx3 += code.code + "^" + this.getString(code.display) + "^LN"
+          obx3 += code.code + "^" + this.getDisplayTerm(code.display) + "^LN"
         }
       }
     )
@@ -167,7 +167,37 @@ TX Text Data (Display)
     return obx2;
   }
 
-  getString(str:string|undefined) {
+  getHL7v2OBX5(item: QuestionnaireItem | undefined) {
+    if (item == undefined) return "";
+    var obx5=""
+
+    /*
+
+    https://hl7-definition.caristix.com/v2/HL7v2.5.1/Tables/0125
+
+CE Coded Entry
+DT Date
+ED FT Encapsulated Data
+Formatted Text (Display)
+NM Numeric
+RP Reference Pointer
+SN Structured Numeric
+ST String Data.
+TM Time
+TS Time Stamp (Date & Time)
+TX Text Data (Display)
+     */
+
+    if (item.type == 'choice') {
+      obx5 += "{{conceptId}}^{{displayTerm}}^SNM"
+    }
+    if (item.type == 'quantity') {
+      obx5 += "0.00|" + this.getUnits(item)
+    }
+    return obx5;
+  }
+
+  getDisplayTerm(str:string|undefined) {
     if (str == undefined) return ""
     return str
   }

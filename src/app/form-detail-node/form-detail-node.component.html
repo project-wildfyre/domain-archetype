@@ -58,18 +58,21 @@
 
 
     <tr *ngIf="item?.definition !== undefined">
-      <td>HL7 FHIR Resource Mapping</td>
+      <td>Data Extraction - HL7 FHIR Resource Mapping</td>
       <td>
         <pre>{{getFHIR(item)}}</pre>
       </td>
     </tr>
-    <tr *ngIf="item?.definition !== undefined">
-      <td>HL7 v2 Segment Mapping (2.5.1)</td>
+    <tr *ngIf="item?.definition !== undefined &&item?.code !== undefined ">
+      <td>Data Extraction - HL7 v2 Segment Mapping (2.5.1)</td>
       <td>
-        OBX-2 Value Type <br/><br/>
+        OBX-2 - Value Type <br/><br/>
         <pre>{{getHL7v2OBX2(item)}}</pre>
-        OBX-3 Observation Identifier<br/><br/>
+        OBX-3 - Observation Identifier<br/><br/>
         <pre>{{getHL7v2OBX3(item)}}</pre>
+
+          OBX-5 - Observation Identifier (and OBX.6 - Units)<br/><br/>
+          <pre>{{getHL7v2OBX5(item)}}</pre>
 
       </td>
     </tr>
