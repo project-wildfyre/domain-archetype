@@ -7,10 +7,27 @@
   <mat-menu #menu="matMenu">
     <a mat-menu-item href="https://termbrowser.nhs.uk/" target="_blank">NHS England SNOMED CT Browser</a>
     <a mat-menu-item href="https://ontoserver.csiro.au/shrimp/?concept=138875005&valueset=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs&fhir=https%3A%2F%2Fontology.nhs.uk%2Fauthoring%2Ffhir" target="_blank">NHS England Ontology Server (Shrimp)</a>
+    <button mat-menu-item [matMenuTriggerFor]="tools">Tools</button>
+    <button mat-menu-item [matMenuTriggerFor]="implementationGuide">HL7 Implementation Guides</button>
+    <button mat-menu-item [matMenuTriggerFor]="informatics">Information Models</button>
+  </mat-menu>
+  <mat-menu #implementationGuide="matMenu">
+      <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/sdc/">HL7 Structured Data Capture</a>
+    <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-ipa/">HL7 Internation Patient Access (Query API)</a>
+    <a mat-menu-item target="_blank" href="https://simplifier.net/guide/clinicalobservations">NHS England Clinical Observations</a>
+    <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/physical-activity/">HL7 Physical Activity (US)</a>
+    <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-sdoh-clinicalcare">HL7 Social Determinents of Health Clinical Care (US)</a>
+  </mat-menu>
+  <mat-menu #tools="matMenu">
+    <a mat-menu-item target="_blank" href="https://formbuilder.nlm.nih.gov/">NLM Form Builder (US)</a>
+  </mat-menu>
+  <mat-menu #informatics="matMenu">
+    <a mat-menu-item target="_blank" href="https://simplifier.net/guide/uk-core-implementation-guide-stu2">HL7 UK Core STU2</a>
+    <a mat-menu-item target="_blank" href="https://theprsb.org/standards/">Professional Record Standards Body</a>
+    <a mat-menu-item target="_blank" href="https://ckm.openehr.org/ckm/">openEHR Clinical Knowledge Manager</a>
   </mat-menu>
 </mat-toolbar>
 <mat-card>
-
   <mat-card-content>
       <span *ngIf="questionnaire?.description !== undefined">
         <h3>Description</h3>
