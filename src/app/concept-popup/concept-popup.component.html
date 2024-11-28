@@ -7,6 +7,49 @@
     {{data.display}}</h2>
 <mat-dialog-content>
    <table>
+     <tr>
+       <td>Category</td>
+       <td>
+               <span *ngIf="lookup !== undefined">
+                   <mat-chip-set *ngFor="let display of getCategory()">
+                       <mat-chip>{{display}}</mat-chip>
+                   </mat-chip-set>
+               </span>
+       </td>
+     </tr>
+     <tr>
+       <td>Recommended FHIR <br/> Resource Mapping</td>
+       <td>
+           <span *ngIf="lookup !== undefined">
+               <mat-chip-set *ngFor="let display of getCategory()">
+                 {{getFHIRResource(display)}}
+               </mat-chip-set>
+           </span>
+       </td>
+     </tr>
+     <tr>
+       <td>Part of</td>
+       <td>
+                <span *ngIf="parent !== undefined">
+                   <span *ngFor="let display of parent">
+                       {{display}}<br/>
+                   </span>
+               </span>
+       </td>
+     </tr>
+     <tr>
+       <td>Active</td>
+       <td>
+               <span *ngIf="lookup !== undefined">
+                   <span *ngIf="getActive()">
+                       <mat-icon>done</mat-icon>
+                   </span>
+                   <span *ngIf="!getActive()">
+                       <mat-icon color="accent">warning</mat-icon>
+                   </span>
+               </span>
+       </td>
+     </tr>
        <tr>
            <td>System</td>
            <td>{{data.system}}</td>
@@ -26,26 +69,6 @@
            </td>
        </tr>
        <tr>
-           <td>Category</td>
-           <td>
-               <span *ngIf="lookup !== undefined">
-                   <mat-chip-set *ngFor="let display of getCategory()">
-                       <mat-chip>{{display}}</mat-chip>
-                   </mat-chip-set>
-               </span>
-           </td>
-       </tr>
-       <tr>
-           <td>Part of</td>
-           <td>
-                <span *ngIf="parent !== undefined">
-                   <span *ngFor="let display of parent">
-                       {{display}}<br/>
-                   </span>
-               </span>
-           </td>
-       </tr>
-       <tr>
            <td>Synonym</td>
 
            <td>
@@ -56,26 +79,23 @@
                </span>
            </td>
        </tr>
-       <tr>
-           <td>Active</td>
-           <td>
+     <tr>
+       <td>Full Name (FSN)</td>
+       <td>
                <span *ngIf="lookup !== undefined">
-                   <span *ngIf="getActive()">
-                       <mat-icon>done</mat-icon>
-                   </span>
-                   <span *ngIf="!getActive()">
-                       <mat-icon color="primary">warning</mat-icon>
+                   <span *ngFor="let display of getFSN()">
+                       {{display}}<br/>
                    </span>
                </span>
-           </td>
-       </tr>
+       </td>
+     </tr>
        <tr>
            <td>More Information</td>
            <td>
-               <a [href]="getTerminologyUrlbyCode(data.code,data.system)" target="_blank">Ontology Server (Shrimp)</a>
+              <a [href]="getTerminologyUrlbyCode(data.code,data.system)" target="_blank">NHS England Ontology Server (Shrimp)</a><br/>
+              <a [href]="'https://termbrowser.nhs.uk/?perspective=full&conceptId1='+ data.code +'&edition=uk-edition'" target="_blank">NHS England SNOMED CT Browser</a>
            </td>
        </tr>
-
        <tr>
            <td>Issues</td>
 
@@ -99,16 +119,7 @@
                </span>
            </td>
        </tr>-->
-       <tr>
-           <td>Full Name (FSN)</td>
-           <td>
-               <span *ngIf="lookup !== undefined">
-                   <span *ngFor="let display of getFSN()">
-                       {{display}}<br/>
-                   </span>
-               </span>
-           </td>
-       </tr>
+
 
    </table>
 </mat-dialog-content>

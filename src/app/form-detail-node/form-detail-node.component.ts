@@ -1,8 +1,16 @@
 import {Component, inject, Input} from '@angular/core';
-import {CodeableConcept, Observation, Questionnaire, QuestionnaireItem, QuestionnaireItemAnswerOption} from "fhir/r4";
+import {
+  CodeableConcept,
+  Coding,
+  Observation,
+  Questionnaire,
+  QuestionnaireItem,
+  QuestionnaireItemAnswerOption
+} from "fhir/r4";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {CodeDialogComponent} from "../code-dialog/code-dialog.component";
+import {ConceptPopupComponent} from "../concept-popup/concept-popup.component";
 
 @Component({
   selector: 'app-form-detail-node',
@@ -259,6 +267,16 @@ TX Text Data (Display)
   showCode(item: QuestionnaireItem | undefined) {
     const dialogRef = this.dialog.open(CodeDialogComponent, {
       data: item,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  showSNOMED(code: Coding) {
+    const dialogRef = this.dialog.open(ConceptPopupComponent, {
+      data: code,
     });
 
     dialogRef.afterClosed().subscribe(result => {

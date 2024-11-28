@@ -223,4 +223,29 @@ export class ConceptPopupComponent implements OnInit {
       }
     }
   }
+
+  getFHIRResource(display: string) {
+    switch(display) {
+      case 'situation':
+      case 'event':
+      case "finding":
+      case 'observable entity' : {
+        return 'Observation'
+      }
+      case 'procedure':{
+        return 'Procedure, ServiceRequest or Task'
+      }
+      case 'disorder': {
+        return 'Condition'
+      }
+      case 'product': {
+        return 'MedicationRequest or MedicationStatement'
+      }
+      default: {
+        //statements;
+        break;
+      }
+    }
+    return "";
+  }
 }

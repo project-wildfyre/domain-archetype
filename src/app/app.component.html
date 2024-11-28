@@ -1,9 +1,16 @@
+<mat-toolbar>
+  <span>Data Capture Form Preview: {{questionnaire?.title}}</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item href="https://termbrowser.nhs.uk/" target="_blank">NHS England SNOMED CT Browser</a>
+    <a mat-menu-item href="https://ontoserver.csiro.au/shrimp/?concept=138875005&valueset=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs&fhir=https%3A%2F%2Fontology.nhs.uk%2Fauthoring%2Ffhir" target="_blank">NHS England Ontology Server (Shrimp)</a>
+  </mat-menu>
+</mat-toolbar>
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>
-            <h1 mat-card-title>Data Capture Form Preview: {{questionnaire?.title}}</h1>
-        </mat-card-title>
-    </mat-card-header>
+
   <mat-card-content>
       <span *ngIf="questionnaire?.description !== undefined">
         <h3>Description</h3>

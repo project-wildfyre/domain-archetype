@@ -11,13 +11,13 @@
                  <!-- <span *ngIf="item?.type !== undefined && (item?.type == 'group' || !panelOpenState)"> -->
                    <mat-chip>{{ item?.type }}</mat-chip>
                   <span *ngIf="item?.enableWhen !== undefined">
-                      <mat-chip style="background-color: #feebeb">Enable When</mat-chip>
+                      <mat-chip>Enable When</mat-chip>
                   </span>
                    <span *ngIf="item?.required !== undefined && item?.required">
-                          <mat-chip style="background-color: #feebeb">Required</mat-chip>
+                      <mat-chip>Required</mat-chip>
                   </span>
                   <span *ngIf="item?.repeats !== undefined && item?.repeats">
-                          <mat-chip>Repeats</mat-chip>
+                    <mat-chip>Repeats</mat-chip>
                   </span>
               </mat-chip-set>
            </span>
@@ -66,16 +66,16 @@
         <td>Question Coding</td>
         <td>
         <li *ngFor="let code of item?.code">
-           <a *ngIf="code.system == 'http://snomed.info/sct'" target="_blank" [href]="'http://snomed.info/id/'+getCoded(item)">SNOMED CT {{ getCoded(item) }} </a>
+           <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="showSNOMED(code)">SNOMED CT {{ getCoded(item) }} </a>
            <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+getCoded(item)">LOINC {{ getCoded(item) }} </a>
         </li>
         </td>
       </tr>
-      <tr>
+    <!-- review use the code view instead  <tr>
         <td>link Id</td>
         <td>{{item?.linkId}}</td>
       </tr>
-
+-->
       <tr *ngIf="item?.enableWhen !== undefined">
         <td>Ask Question When</td>
         <td>

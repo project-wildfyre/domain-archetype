@@ -28,6 +28,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import { CodeDialogComponent } from './code-dialog/code-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ConceptPopupComponent} from "./concept-popup/concept-popup.component";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
 
 @NgModule({
@@ -61,7 +62,10 @@ import {ConceptPopupComponent} from "./concept-popup/concept-popup.component";
     MatTooltip,
     MatToolbarModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger
   ],
   providers: [
     provideAnimationsAsync()
