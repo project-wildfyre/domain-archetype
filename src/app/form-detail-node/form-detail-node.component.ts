@@ -1,6 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {CodeableConcept, Observation, Questionnaire, QuestionnaireItem, QuestionnaireItemAnswerOption} from "fhir/r4";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatDialog} from "@angular/material/dialog";
+import {CodeDialogComponent} from "../code-dialog/code-dialog.component";
 
 @Component({
   selector: 'app-form-detail-node',
@@ -8,7 +10,7 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrl: './form-detail-node.component.scss'
 })
 export class FormDetailNodeComponent {
-
+  readonly dialog = inject(MatDialog);
   item: QuestionnaireItem | undefined;
   questionnaire: Questionnaire | undefined;
   panelOpenState = false;
@@ -243,5 +245,24 @@ TX Text Data (Display)
       }
     })
     return answer
+  }
+
+  getWarnings(item : QuestionnaireItem | undefined): string[] {
+    var warnings : string[] = []
+    if (item == undefined) return []
+    if (item?.type == 'choice' && item?.code == undefined) warnings.push("Answer is a choice and the question is not coded")
+    if (this.answersNotSNOMED(item)) warnings.push("Answers are not SNOMED coded")
+    if (this.answersContainLOINC(item)) warnings.push("Answers contain LOINC coded entries")
+    return warnings
+  }
+
+  showCode(item: QuestionnaireItem | undefined) {
+    const dialogRef = this.dialog.open(CodeDialogComponent, {
+      data: item,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

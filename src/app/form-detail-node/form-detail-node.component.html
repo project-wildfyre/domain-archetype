@@ -5,32 +5,33 @@
         {{item?.prefix}}&nbsp;{{item?.text}}
       </mat-panel-title>
       <mat-panel-description>
+
           <span>
               <mat-chip-set aria-label="Item Type">
                  <!-- <span *ngIf="item?.type !== undefined && (item?.type == 'group' || !panelOpenState)"> -->
                    <mat-chip>{{ item?.type }}</mat-chip>
-                  <span *ngFor="let when of item?.enableWhen">
-                            Enable when {{getQuestion(when.question)}}&nbsp;{{when.operator}}&nbsp;{{when.answerBoolean}}
-                            <br/>
-                        </span>
+                  <span *ngIf="item?.enableWhen !== undefined">
+                      <mat-chip style="background-color: #feebeb">Enable When</mat-chip>
+                  </span>
                    <span *ngIf="item?.required !== undefined && item?.required">
                           <mat-chip style="background-color: #feebeb">Required</mat-chip>
                   </span>
                   <span *ngIf="item?.repeats !== undefined && item?.repeats">
                           <mat-chip>Repeats</mat-chip>
                   </span>
-                  <span *ngIf="item?.type == 'choice' && item?.code == undefined">
-                      <mat-icon color="accent">warning</mat-icon> No code
-                  </span>
-                  <span *ngIf="answersNotSNOMED(item)">
-                      <mat-icon color="accent">warning</mat-icon> Answers are not SNOMED
-                  </span>
-                  <span *ngIf="answersContainLOINC(item)">
-                      <mat-icon color="accent">information</mat-icon> Answers contain LOINC
-                  </span>
               </mat-chip-set>
            </span>
-        <span></span>
+        <span>
+         <span *ngIf="getWarnings(item).length>0">
+           <button mat-icon-button color="primary">
+                <mat-icon>info</mat-icon>
+           </button>
+         </span>
+           <button mat-icon-button (click)="showCode(item)">
+                <mat-icon>code</mat-icon>
+           </button>
+        </span>
+
 
       </mat-panel-description>
 
@@ -50,7 +51,17 @@
     </mat-expansion-panel-header>
 
     <table style="width: 100%">
-
+      <tr *ngIf="getWarnings(item).length > 0" >
+            <td>
+              Validation Issues
+              <button mat-icon-button color="primary"><mat-icon>info</mat-icon></button>
+            </td>
+        <td>
+           <li *ngFor="let warn of getWarnings(item)">
+             {{warn}}
+           </li>
+        </td>
+      </tr>
     <tr *ngIf="item?.code !== undefined">
         <td>Question Coding</td>
         <td>
@@ -63,6 +74,20 @@
       <tr>
         <td>link Id</td>
         <td>{{item?.linkId}}</td>
+      </tr>
+
+      <tr *ngIf="item?.enableWhen !== undefined">
+        <td>Ask Question When</td>
+        <td>
+              <span *ngFor="let when of item?.enableWhen">
+
+                Enable when question <i>{{getQuestion(when.question)}}</i>&nbsp;{{when.operator}}&nbsp;{{when.answerBoolean}}
+                  <span *ngIf="when.answerCoding !== undefined">
+                      {{when.answerCoding.code}}
+                  </span>
+                  <br/>
+              </span>
+        </td>
       </tr>
     <tr *ngIf="item?.answerOption !== undefined">
         <td>Answers

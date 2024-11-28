@@ -15,7 +15,7 @@ import { LhcFormComponent } from './lhc-form/lhc-form.component';
 import { FormDetailComponent } from './form-detail/form-detail.component';
 import {MatTreeModule, MatTreeNode, MatTreeNodePadding, MatTreeNodeToggle} from "@angular/material/tree";
 import { MatIconModule} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatButtonModule, MatIconButton} from "@angular/material/button";
 import { FormDetailNodeComponent } from './form-detail-node/form-detail-node.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -23,34 +23,46 @@ import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {MatTooltip} from "@angular/material/tooltip";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { CodeDialogComponent } from './code-dialog/code-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {ConceptPopupComponent} from "./concept-popup/concept-popup.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LhcFormComponent,
     FormDetailComponent,
-    FormDetailNodeComponent
+    FormDetailNodeComponent,
+    CodeDialogComponent,
+    ConceptPopupComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        CovalentLayoutModule,
-        CovalentHighlightModule,
-        CovalentMarkdownModule,
-        CovalentFlavoredMarkdownModule,
-        CovalentDynamicFormsModule,
-        CovalentMessageModule,
-        MatTabsModule,
-        MatCardModule,
-        MatTreeModule,
-        MatIconModule,
-        MatIconButton,
-        MatChipsModule,
-        MatExpansionModule,
-        MatTableModule,
-        MatPaginator,
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    CovalentLayoutModule,
+    CovalentHighlightModule,
+    CovalentMarkdownModule,
+    CovalentFlavoredMarkdownModule,
+    CovalentDynamicFormsModule,
+    CovalentMessageModule,
+    MatTabsModule,
+    MatCardModule,
+    MatTreeModule,
+    MatIconModule,
+    MatIconButton,
+    MatChipsModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginator,
+    MatTooltip,
+    MatToolbarModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   providers: [
     provideAnimationsAsync()
   ],
