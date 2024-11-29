@@ -35,9 +35,7 @@
 
       </mat-panel-description>
 
-            <span *ngIf="hasAnswerType(item) || item?.initial !== undefined">
-              {{getAnswer(item)}}
-            </span>
+
             <span *ngIf="item?.readOnly">
                             <mat-chip>read only</mat-chip>
                         </span>
@@ -89,6 +87,12 @@
               </span>
         </td>
       </tr>
+        <tr *ngIf="item?.answerValueSet !== undefined">
+            <td>Answer ValueSet</td>
+            <td>
+              {{getAnswerValueSet(item)}}
+            </td>
+        </tr>
     <tr *ngIf="item?.answerOption !== undefined">
         <td>Answers
         </td>

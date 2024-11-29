@@ -49,11 +49,12 @@ export class FormDetailNodeComponent {
     this.questionnaire = questionnaire;
   }
 
-  getAnswer(item: QuestionnaireItem | undefined) {
+  getAnswerValueSet(item: QuestionnaireItem | undefined) {
     var retStr = ""
     if (item !== undefined && item.answerValueSet !== undefined) {
         var valueSet = decodeURI(item.answerValueSet).split('ecl')
         if (valueSet.length> 1) retStr = "ecl = " + valueSet[1].replace('%2F','').replace('+',' ')
+        else retStr = item.answerValueSet
     }
     return retStr;
   }
