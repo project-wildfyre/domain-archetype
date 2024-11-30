@@ -52,17 +52,30 @@ export class HL7MappingComponent {
     if (this.item.definition?.includes("valueInteger") || this.item.type == 'integer') {
       observation.valueInteger = 12345
     }
-    if (this.item.definition?.includes("valueCodeableConcept")) {
-      observation.valueCodeableConcept = {
-        "coding": [
-          {
-            "system": "http://snomed.info/sct",
-            "code": "{{selectedCode}}",
-            "display": "The display term for the selected code"
-          }
-        ]
+    if (this.item.definition?.includes("valueCodeableConcept") || this.item.type == 'choice' || this.item.type == 'open-choice') {
+      if (this.item.answerOption !== undefined && this.item.answerOption[0].valueCoding !== undefined
+      ) {
+        observation.valueCodeableConcept = {
+          "coding": [
+            {
+              "system": this.item.answerOption[0].valueCoding?.system,
+              "code": this.item.answerOption[0].valueCoding?.code,
+              "display": this.item.answerOption[0].valueCoding?.display
+            }
+          ]
+        }
       }
-
+      if (observation.valueCodeableConcept == undefined) {
+        observation.valueCodeableConcept = {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "{{selectedCode}}",
+              "display": "The display term for the selected code"
+            }
+          ]
+        }
+      }
     }
     return JSON.stringify(observation, undefined, 4);
   }
@@ -74,7 +87,7 @@ export class HL7MappingComponent {
     this.item.code.forEach( code => {
           if (code.system == "http://snomed.info/sct") {
             if (obx3 !== '') obx3 += "~"
-            obx3 += code.code + "^" + this.getDisplayTerm(code.display) + "^SNM"
+            obx3 += code.code + "^" + this.getDisplayTerm(code.display) + "^SNM3"
           }
           if (code.system == "http://loinc.org") {
             if (obx3 !== '') obx3 += "~"
@@ -140,10 +153,13 @@ TX Text Data (Display)
      */
 
     if (this.item.type == 'choice') {
-      obx5 += "{{conceptId}}^{{displayTerm}}^SNM"
+      obx5 += "{{valueCodeableConcept.coding.code}}^{{valueCodeableConcept.coding.display}}^covertToV2({{valueCodeableConcept.coding.system}})"
     }
     if (this.item.type == 'quantity') {
       obx5 += "0.00|" + this.getUnits()
+    }
+    if (this.item.type == 'integer') {
+      obx5 += "12345"
     }
     return obx5;
   }

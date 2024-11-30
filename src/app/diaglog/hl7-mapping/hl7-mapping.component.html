@@ -1,24 +1,30 @@
-<h2 mat-dialog-title>Code</h2>
+<h2 mat-dialog-title>Example HL7 Mapping</h2>
 <mat-dialog-content>
     <table class="mat-elevation-z8">
 
         <tr *ngIf="item?.definition !== undefined || item?.code !== undefined">
-            <td>Data Extraction - HL7 FHIR Resource Mapping</td>
+            <td>HL7 FHIR</td>
             <td>
                 <pre>{{getFHIR()}}</pre>
             </td>
         </tr>
         <tr *ngIf="item?.definition !== undefined || item?.code !== undefined ">
-            <td>Data Extraction - HL7 v2 Segment Mapping (2.5.1)</td>
+            <td>HL7 v2 Segment<br/>(2.5.1)</td>
             <td>
-                OBX-2 - Value Type <br/><br/>
-                <pre>{{getHL7v2OBX2()}}</pre>
-                OBX-3 - Observation Identifier<br/><br/>
-                <pre>{{getHL7v2OBX3()}}</pre>
-
-                OBX-5 - Observation Identifier (and OBX.6 - Units)<br/><br/>
-                <pre>{{getHL7v2OBX5()}}</pre>
-
+                <table>
+                    <tr>
+                        <td>OBX-2 - Value Type</td>
+                        <td>{{getHL7v2OBX2()}}</td>
+                    </tr>
+                    <tr>
+                        <td>OBX-3 - Observation Identifier</td>
+                        <td>{{getHL7v2OBX3()}}</td>
+                    </tr>
+                    <tr>
+                        <td>OBX-5 - Observation Identifier <br/>(and OBX.6 - Units)</td>
+                        <td>{{getHL7v2OBX5()}}</td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
