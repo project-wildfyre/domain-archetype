@@ -25,11 +25,14 @@ import { MatTableModule} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import { CodeDialogComponent } from './code-dialog/code-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {ConceptPopupComponent} from "./concept-popup/concept-popup.component";
-import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 
+import {MatMenuModule} from "@angular/material/menu";
+import { FormAnswerComponent } from './form-answer/form-answer.component';
+import {A11yModule} from '@angular/cdk/a11y';
+import {CodeDialogComponent} from "./diaglog/code-dialog/code-dialog.component";
+import {ConceptPopupComponent} from "./diaglog/concept-popup/concept-popup.component";
+import {HL7MappingComponent} from "./diaglog/hl7-mapping/hl7-mapping.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
     FormDetailComponent,
     FormDetailNodeComponent,
     CodeDialogComponent,
-    ConceptPopupComponent
+    ConceptPopupComponent,
+    FormAnswerComponent,
+    HL7MappingComponent
   ],
   imports: [
     BrowserModule,
@@ -63,9 +68,8 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
     MatToolbarModule,
     MatDialogModule,
     MatButtonModule,
-    MatMenu,
-    MatMenuItem,
-    MatMenuTrigger
+    MatMenuModule,
+    A11yModule
   ],
   providers: [
     provideAnimationsAsync()

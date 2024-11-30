@@ -41,7 +41,7 @@
     ></td-message>
 
     <mat-tab-group (selectedTabChange)="changedTab($event)">
-        <mat-tab label="Detail">
+        <mat-tab label="Summary">
             <span *ngIf="currentTab == 0 && questionnaire !== null">
                 <app-form-detail [formDefinition]="questionnaire"></app-form-detail>
             </span>
@@ -51,7 +51,6 @@
                  <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
              </span>
         </mat-tab>
-
     </mat-tab-group>
   </mat-card-content>
 </mat-card>
