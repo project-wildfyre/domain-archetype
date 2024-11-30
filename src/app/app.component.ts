@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatTabChangeEvent} from "@angular/material/tabs";
-import {Questionnaire} from "fhir/r4";
+import {Questionnaire, QuestionnaireItem} from "fhir/r4";
 
 
 
@@ -36,13 +36,19 @@ export class AppComponent implements OnInit {
     fetch(url).then(data => {
       if (data.type == 'cors') {
         data.json().then(data2 => {
-          console.log(data2)
-          this.questionnaire = data2
+          this.questionnaire = this.fixEcl(data2)
+          console.log(this.questionnaire)
         })
       }
     })
   }
 
+  fixEcl(questionnaire : Questionnaire) {
+    var quest = JSON.stringify(questionnaire)
+    quest = quest.replaceAll('%3C+','%3C')
+    quest = quest.replaceAll('ecl%2F','ecl')
+    return JSON.parse(quest)
+  }
 
 
   changedTab(event: MatTabChangeEvent) {

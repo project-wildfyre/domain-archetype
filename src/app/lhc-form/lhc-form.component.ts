@@ -37,6 +37,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
     this.ctx = client({
       serverUrl: this.sdcServer
     });
+
   }
 
   ngAfterViewInit(): void {
@@ -47,6 +48,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
 
   populateQuestionnaireNoPopulation() {
     LForms.Util.setFHIRContext(this.ctx)
+    console.log(this.ctx)
     let formDef = LForms.Util.convertFHIRQuestionnaireToLForms(this.questionnaire, "R4");
     var newFormData = (new LForms.LFormsData(formDef));
     try {

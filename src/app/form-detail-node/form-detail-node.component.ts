@@ -35,8 +35,6 @@ export class FormDetailNodeComponent {
 
 
 
-
-
   getWarnings(item : QuestionnaireItem | undefined): string[] {
     var warnings : string[] = []
     if (item == undefined) return []
