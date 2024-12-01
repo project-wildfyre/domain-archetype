@@ -29,10 +29,25 @@
 </mat-toolbar>
 <mat-card>
   <mat-card-content>
-      <span *ngIf="questionnaire?.description !== undefined">
-        <h3>Description</h3>
-        <td-markdown [content]="getDescription()"></td-markdown>
-        </span>
+      <table>
+      <tr *ngIf="questionnaire?.code !== undefined">
+          <td> <h3>Code</h3></td>
+          <td>
+          <p *ngFor="let code of questionnaire?.code">
+                <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appSerivce.showSNOMED(code)">{{ appSerivce.getCoded(questionnaire?.code) }} </a>
+                <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appSerivce.getCoded(questionnaire?.code)">LOINC {{ appSerivce.getCoded(questionnaire?.code) }} </a>
+            </p>
+          </td>
+      </tr>
+      <tr *ngIf="questionnaire?.description !== undefined">
+        <td><h3>Description</h3></td>
+        <td><td-markdown [content]="getDescription()"></td-markdown></td>
+        </tr>
+      <tr *ngIf="questionnaire?.publisher !== undefined">
+        <td><h3>Publisher</h3></td>
+          <td>{{questionnaire?.publisher}}</td>
+        </tr>
+      </table>
     <td-message
       label="Information"
       sublabel="Proof of concept"
@@ -49,6 +64,11 @@
         <mat-tab label="Preview">
              <span *ngIf="currentTab == 1 && questionnaire !== null">
                  <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
+             </span>
+        </mat-tab>
+        <mat-tab label="FHIR Questionaire">
+             <span *ngIf="currentTab == 2 && questionnaire !== null">
+                 <app-questionnaire-edit [formDefinition]="questionnaire"></app-questionnaire-edit>
              </span>
         </mat-tab>
     </mat-tab-group>

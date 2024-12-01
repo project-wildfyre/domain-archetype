@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {CodeDialogComponent} from "../diaglog/code-dialog/code-dialog.component";
 import {ConceptPopupComponent} from "../diaglog/concept-popup/concept-popup.component";
 import {HL7MappingComponent} from "../diaglog/hl7-mapping/hl7-mapping.component";
+import {AppService} from "../app.service";
 
 
 
@@ -33,6 +34,7 @@ export class FormDetailComponent {
     }
   }
   readonly dialog = inject(MatDialog);
+  readonly appService = inject(AppService)
   displayedColumns: string[] = ['name', 'enabled', 'coding', 'type', 'required', 'repeats', 'answer',  'fhir'];
   questionnaire : any;
 
@@ -81,24 +83,8 @@ export class FormDetailComponent {
       console.log('The dialog was closed');
     });
   }
-  showSNOMED(code: Coding) {
-    const dialogRef = this.dialog.open(ConceptPopupComponent, {
-      data: code,
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-  getCoded(item: QuestionnaireItem | undefined) {
-    var retStr = ""
-    if (item !== undefined && item.code !== undefined) {
-      item.code.forEach( coding => {
-        if (coding.code !== undefined) retStr = coding.code
-      })
-    }
-    return retStr;
-  }
+
   getQuestion(question: string) {
     if (this.questionnaire !== undefined) {
       return this.getQuestionItem(question, this.questionnaire.item)

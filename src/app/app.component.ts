@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {Questionnaire, QuestionnaireItem} from "fhir/r4";
+import {AppService} from "./app.service";
 
 
 
@@ -15,7 +16,7 @@ import {Questionnaire, QuestionnaireItem} from "fhir/r4";
 export class AppComponent implements OnInit {
   title = 'questionnaire-viewer';
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, public appSerivce: AppService) {
   }
   questionnaire : Questionnaire | undefined;
 

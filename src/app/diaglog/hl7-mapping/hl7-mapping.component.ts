@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CodeableConcept, Observation, QuestionnaireItem} from "fhir/r4";
+import {CodeableConcept, Observation, ObservationComponent, QuestionnaireItem} from "fhir/r4";
 
 @Component({
   selector: 'app-hl7-mapping',
@@ -40,10 +40,22 @@ export class HL7MappingComponent {
       code: concept
     }
     if (this.item.definition?.includes("valueQuantity")) {
-      observation.valueQuantity = {
+      var valueQuantity = {
         "value": 0.0,
         "system": "http://unitsofmeasure.org",
         "code": this.getUnits()
+      }
+      if (this.item.definition?.includes("Observation#component")) {
+        var obsComponent: ObservationComponent = {
+          code: concept,
+          valueQuantity: valueQuantity
+        }
+        // @ts-ignore
+        observation.code = undefined
+        observation.component = []
+        observation.component.push(obsComponent)
+      } else {
+        observation.valueQuantity = valueQuantity
       }
     }
     if (this.item.definition?.includes("valueBoolean") || this.item.type == 'boolean') {
@@ -53,9 +65,10 @@ export class HL7MappingComponent {
       observation.valueInteger = 12345
     }
     if (this.item.definition?.includes("valueCodeableConcept") || this.item.type == 'choice' || this.item.type == 'open-choice') {
+      var codeableConcept = undefined
       if (this.item.answerOption !== undefined && this.item.answerOption[0].valueCoding !== undefined
       ) {
-        observation.valueCodeableConcept = {
+        codeableConcept = {
           "coding": [
             {
               "system": this.item.answerOption[0].valueCoding?.system,
@@ -65,8 +78,8 @@ export class HL7MappingComponent {
           ]
         }
       }
-      if (observation.valueCodeableConcept == undefined) {
-        observation.valueCodeableConcept = {
+      if (codeableConcept == undefined) {
+        codeableConcept = {
           "coding": [
             {
               "system": "http://snomed.info/sct",
@@ -75,6 +88,15 @@ export class HL7MappingComponent {
             }
           ]
         }
+      }
+      if (this.item.definition?.includes("bodySite")) {
+        // @ts-ignore
+        observation.code = undefined
+        observation.bodySite = codeableConcept
+      } else if (this.item.definition?.includes("Observation#component")) {
+
+      } else {
+        observation.valueCodeableConcept = codeableConcept
       }
     }
     return JSON.stringify(observation, undefined, 4);

@@ -1,0 +1,7 @@
+
+<div style="height: calc(100vh - 280px)" >
+    <ngx-monaco-editor  class="my-code-editor"  style="height: 100%;"
+                        [options]="editorOptions" [(ngModel)]="data"
+                        (ngModelChange)="checkType()" (onInit)="onInit($event)"></ngx-monaco-editor>
+</div>
+

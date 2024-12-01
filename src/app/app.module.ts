@@ -33,6 +33,9 @@ import {A11yModule} from '@angular/cdk/a11y';
 import {CodeDialogComponent} from "./diaglog/code-dialog/code-dialog.component";
 import {ConceptPopupComponent} from "./diaglog/concept-popup/concept-popup.component";
 import {HL7MappingComponent} from "./diaglog/hl7-mapping/hl7-mapping.component";
+import {QuestionnaireEditComponent} from "./questionnaire-edit/questionnaire-edit.component";
+import {MonacoEditorModule} from "ngx-monaco-editor-v2";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -43,34 +46,37 @@ import {HL7MappingComponent} from "./diaglog/hl7-mapping/hl7-mapping.component";
     CodeDialogComponent,
     ConceptPopupComponent,
     FormAnswerComponent,
-    HL7MappingComponent
+    HL7MappingComponent,
+      QuestionnaireEditComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    CovalentLayoutModule,
-    CovalentHighlightModule,
-    CovalentMarkdownModule,
-    CovalentFlavoredMarkdownModule,
-    CovalentDynamicFormsModule,
-    CovalentMessageModule,
-    MatTabsModule,
-    MatCardModule,
-    MatTreeModule,
-    MatIconModule,
-    MatIconButton,
-    MatChipsModule,
-    MatExpansionModule,
-    MatTableModule,
-    MatPaginator,
-    MatTooltip,
-    MatToolbarModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatMenuModule,
-    A11yModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        CovalentLayoutModule,
+        CovalentHighlightModule,
+        CovalentMarkdownModule,
+        CovalentFlavoredMarkdownModule,
+        CovalentDynamicFormsModule,
+        CovalentMessageModule,
+        MatTabsModule,
+        MatCardModule,
+        MatTreeModule,
+        MatIconModule,
+        MatIconButton,
+        MatChipsModule,
+        MatExpansionModule,
+        MatTableModule,
+        MatPaginator,
+        MatTooltip,
+        MatToolbarModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatMenuModule,
+        A11yModule,
+        MonacoEditorModule.forRoot(),
+        FormsModule
+    ],
   providers: [
     provideAnimationsAsync()
   ],

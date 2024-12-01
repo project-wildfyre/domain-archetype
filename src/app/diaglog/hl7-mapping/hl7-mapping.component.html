@@ -1,13 +1,26 @@
 <h2 mat-dialog-title>Example HL7 Mapping</h2>
 <mat-dialog-content>
-    <table class="mat-elevation-z8">
+    <td-message
+            label="Information"
+            sublabel="Experimental"
+            color="primary"
+            icon="information"
+    ></td-message>
 
+    <table >
+        <tr *ngIf="item?.definition !== undefined ">
+            <td>Definition</td>
+            <td>
+                {{item.definition}}
+            </td>
+        </tr>
         <tr *ngIf="item?.definition !== undefined || item?.code !== undefined">
             <td>HL7 FHIR</td>
             <td>
                 <pre>{{getFHIR()}}</pre>
             </td>
         </tr>
+        <!--
         <tr *ngIf="item?.definition !== undefined || item?.code !== undefined ">
             <td>HL7 v2 Segment<br/>(2.5.1)</td>
             <td>
@@ -26,9 +39,9 @@
                     </tr>
                 </table>
             </td>
-        </tr>
+        </tr> -->
     </table>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+    <button color = "primary" mat-button mat-dialog-close cdkFocusInitial>OK</button>
 </mat-dialog-actions>

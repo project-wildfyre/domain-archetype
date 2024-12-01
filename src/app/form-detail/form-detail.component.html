@@ -12,8 +12,7 @@
                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
             </button>
-
-           {{node.item.prefix}} {{node.name}}
+            <span>{{node.item.prefix}} {{node.name}}</span>
         </td>
     </ng-container>
 
@@ -77,13 +76,12 @@
     <ng-container matColumnDef="fhir">
         <th mat-header-cell *matHeaderCellDef class="link-col"> </th>
         <td mat-cell *matCellDef="let node" >
-            <button mat-icon-button (click)="showCode(node.item)">
+            <button matTooltip="View source" matTooltipClass="mat-tooltip-white"  mat-icon-button (click)="showCode(node.item)">
                 <mat-icon>code</mat-icon>
             </button>
-            <button *ngIf="node.item.code !== undefined" mat-icon-button (click)="showMapping(node.item)">
+            <button matTooltip="View HL7 mapping" matTooltipClass="mat-tooltip-white" *ngIf="node.item.code !== undefined" mat-icon-button (click)="showMapping(node.item)">
                 <mat-icon>map</mat-icon>
             </button>
-
         </td>
     </ng-container>
 
@@ -91,8 +89,8 @@
         <th mat-header-cell *matHeaderCellDef> Code </th>
         <td mat-cell *matCellDef="let node">
             <p *ngFor="let code of node.item.code">
-                <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="showSNOMED(code)">{{ getCoded(node.item) }} </a>
-                <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+getCoded(node.item)">LOINC {{ getCoded(node.item) }} </a>
+                <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appService.showSNOMED(code)">{{ appService.getCoded(node.item.code) }} </a>
+                <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appService.getCoded(node.item.code)">LOINC {{ appService.getCoded(node.item.code) }} </a>
             </p>
         </td>
     </ng-container>
