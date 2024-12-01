@@ -1,10 +1,17 @@
-.small-col {
-  width: 5%;
-  max-width: 5%;
+.mat-column-enabled {
+  width: 10% !important;
 }
-.small-col {
-  width: 10%;
-  max-width: 10%;
+.mat-column-required {
+  width: 5% !important;
+}
+.mat-column-repeats {
+  width: 5% !important;
+}
+.mat-column-fhir {
+  width: 10% !important;
+}
+.mat-column-name {
+  width: 35% !important;
 }
 
 

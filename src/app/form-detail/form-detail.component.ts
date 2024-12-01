@@ -35,7 +35,8 @@ export class FormDetailComponent {
   }
   readonly dialog = inject(MatDialog);
   readonly appService = inject(AppService)
-  displayedColumns: string[] = ['name', 'enabled', 'coding', 'type', 'required', 'repeats', 'answer',  'fhir'];
+  // not used: 'coding',
+  displayedColumns: string[] = ['name', 'type','enabled','answer',  'required', 'repeats',   'fhir'];
   questionnaire : any;
 
   private _transformer = (node: QuestionnaireItem, level: number) : ItemFlatNode => {
