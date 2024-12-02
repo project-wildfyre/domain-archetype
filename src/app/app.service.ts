@@ -10,12 +10,10 @@ export class AppService {
   readonly dialog = inject(MatDialog);
   constructor() { }
 
-  getCoded(code : Coding[] | undefined) {
+  getCoded(code : Coding | undefined) {
     var retStr = ""
-    if (code !== undefined) {
-      code.forEach( coding => {
-        if (coding.code !== undefined) retStr = coding.code
-      })
+    if (code !== undefined && code.code !== undefined) {
+      retStr = code.code
     }
     return retStr;
   }

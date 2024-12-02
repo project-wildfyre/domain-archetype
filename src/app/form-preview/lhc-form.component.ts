@@ -66,41 +66,4 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /*
-  downloadFile(fileName: string, results: Object) {
-    const data = JSON.stringify(results, undefined, 2);
-    const blob = new Blob([data], {
-      type: 'application/json'
-    });
-    //const url = this.sanitizer.bypassSecurityTrustResourceUrl(
-    let url = window.URL.createObjectURL(blob);
-    // @ts-ignore
-    window.open(url);
-  }
-  extract(newQuestionnaireResponse: QuestionnaireResponse, fileName : string | undefined)
-  {
-    this.http.post(this.sdcServer + '/QuestionnaireResponse/$extract', newQuestionnaireResponse).subscribe(bundleResult => {
-
-          if (bundleResult !== undefined) {
-            let bundle = bundleResult as Bundle
-            if (fileName !== undefined) {
-              this.downloadFile(fileName,bundleResult)
-            }
-            if (bundle !== undefined && bundle.entry !== undefined) {
-
-              this.http.post(this.sdcServer + '/', bundle).subscribe((bundle) => {
-                  },
-                  error => {
-              
-                    console.log(JSON.stringify(error))
-                  })
-            }
-          }
-
-        },
-        error => {
-          console.log(JSON.stringify(newQuestionnaireResponse))
-          
-        })
-  } */
 }

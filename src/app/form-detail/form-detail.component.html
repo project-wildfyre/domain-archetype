@@ -17,12 +17,8 @@
                         </button>
                     </td>
                  <td>
-                {{node.item.prefix}} {{node.name}}
-
-                <p *ngFor="let code of node.item.code">
-                    <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appService.showSNOMED(code)">{{ appService.getCoded(node.item.code) }} </a>
-                    <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appService.getCoded(node.item.code)">LOINC {{ appService.getCoded(node.item.code) }} </a>
-                </p>
+                {{node.item.prefix}} {{node.name}} <br/>
+                <app-clinical-coding [setCoding]="node.item.code"></app-clinical-coding>
             </td>
                 </tr>
             </table>

@@ -11,12 +11,10 @@ import {CovalentLayoutModule} from "@covalent/core/layout";
 import {CovalentMessageModule} from "@covalent/core/message";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { LhcFormComponent } from './lhc-form/lhc-form.component';
 import { FormDetailComponent } from './form-detail/form-detail.component';
 import {MatTreeModule, MatTreeNode, MatTreeNodePadding, MatTreeNodeToggle} from "@angular/material/tree";
 import { MatIconModule} from "@angular/material/icon";
 import {MatButtonModule, MatIconButton} from "@angular/material/button";
-import { FormDetailNodeComponent } from './form-detail-node/form-detail-node.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatCardModule} from "@angular/material/card";
@@ -37,6 +35,10 @@ import {CovalentFileModule} from "@covalent/core/file";
 import {InfoDiaglogComponent} from "./diaglog/info-diaglog/info-diaglog.component";
 import {FormAnswerComponent} from "./form-detail/form-answer/form-answer.component";
 import {QuestionnaireEditComponent} from "./form-editor/questionnaire-edit.component";
+import {LhcFormComponent} from "./form-preview/lhc-form.component";
+import {FormDetailNodeComponent} from "./form-detail/form-detail-node/form-detail-node.component";
+import {ClinicalCodingComponent} from "./widget/clinical-coding/clinical-coding.component";
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import {QuestionnaireEditComponent} from "./form-editor/questionnaire-edit.compo
     FormAnswerComponent,
     HL7MappingComponent,
       QuestionnaireEditComponent,
-      InfoDiaglogComponent
+      InfoDiaglogComponent,
+      ClinicalCodingComponent
   ],
     imports: [
         BrowserModule,

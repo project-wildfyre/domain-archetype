@@ -8,7 +8,7 @@
         <ng-container matColumnDef="code">
             <th mat-header-cell *matHeaderCellDef> Code </th>
             <td mat-cell *matCellDef="let element">
-                {{element.valueCoding.code}}
+                <app-clinical-coding [setCode]="element.valueCoding"></app-clinical-coding>
                     <span *ngIf="element.initialSelected !== undefined && element.initialSelected ">
                             <mat-icon color="accent">done</mat-icon>
                     </span>
@@ -17,8 +17,8 @@
         <ng-container matColumnDef="display">
             <th mat-header-cell *matHeaderCellDef> Display </th>
             <td mat-cell *matCellDef="let element"> <span >
-                            {{element.valueCoding.display}}
-                        </span> </td>
+                 {{element.valueCoding.display}}
+            </span> </td>
         </ng-container>
         <ng-container matColumnDef="codesystem">
             <th mat-header-cell *matHeaderCellDef> Code System </th>

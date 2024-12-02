@@ -49,10 +49,7 @@
       <div layout="row" layout-align="space-between center">
           <div>Status: <mat-chip>  {{questionnaire?.status}}</mat-chip></div>
           <div> Code:
-              <span  *ngFor="let code of questionnaire?.code">
-                    <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appSerivce.showSNOMED(code)">{{ appSerivce.getCoded(questionnaire?.code) }} </a>
-                    <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appSerivce.getCoded(questionnaire?.code)">LOINC {{ appSerivce.getCoded(questionnaire?.code) }} </a>
-              </span>
+              <app-clinical-coding *ngIf="questionnaire?.code !== undefined" [setCoding]="questionnaire?.code"></app-clinical-coding>
           </div>
           <div> Publisher: {{questionnaire?.publisher}}</div>
       </div>
@@ -80,6 +77,7 @@
                  <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
              </span>
         </mat-tab>
+
         <mat-tab label="FHIR Questionaire">
              <span *ngIf="currentTab == 2 && questionnaire !== null">
                  <app-questionnaire-edit [formDefinition]="questionnaire" (questionnaireChanged)="updateQuestionnaire($event)"></app-questionnaire-edit>
