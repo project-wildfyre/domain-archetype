@@ -1,51 +1,58 @@
-<mat-toolbar>
-  <span>Data Capture Form Preview: {{questionnaire?.title}}</span>
-  <span class="example-spacer"></span>
-    <span>
-        <td-file-input mat-icon-button
-                class="file-input"
-                     #fileInput
-                     [(ngModel)]="file"
-                     (selectFile)="selectFileEvent($event)"
-                     accept=".json">
-                     <mat-icon>upload_file</mat-icon>Upload
-        </td-file-input>
-        <button mat-stroked-button (click)="download()"><mat-icon>download</mat-icon>Save</button>
-        <a mat-icon-button class="example-icon" href="https://github.com/project-wildfyre/questionnaire-viewer" target="_blank">
-            <i class="fa fa-github" style="font-size:24px"></i>
-        </a>
-        <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
-            <mat-icon>menu</mat-icon>
-        </button>
-    </span>
-  <mat-menu #menu="matMenu">
-      <a mat-menu-item target="_blank" href="https://formbuilder.nlm.nih.gov/">NLM Form Builder (US)</a>
-      <a mat-menu-item target="_blank" href="https://project-wildfyre.github.io/formbuilder-lhcforms/">NLM Form Builder (UK Experimental)</a>
-    <button mat-menu-item [matMenuTriggerFor]="tools">Terminology</button>
-      <button mat-menu-item [matMenuTriggerFor]="informatics">Information Models</button>
-      <button mat-menu-item [matMenuTriggerFor]="businessIG">Clinical Process Focused Implementation Guides</button>
-      <button mat-menu-item [matMenuTriggerFor]="technicalIG">Technical Implementation Guides</button>
-  </mat-menu>
-  <mat-menu #businessIG="matMenu">
-    <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/physical-activity/">HL7 Physical Activity (US)</a>
-    <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-sdoh-clinicalcare">HL7 Social Determinents of Health Clinical Care (US)</a>
-  </mat-menu>
-    <mat-menu #technicalIG="matMenu">
-        <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/sdc/">HL7 Structured Data Capture</a>
-        <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-ipa/">HL7 Internation Patient Access (Query API)</a>
-    </mat-menu>
-  <mat-menu #tools="matMenu">
-      <a mat-menu-item href="https://termbrowser.nhs.uk/" target="_blank">NHS England SNOMED CT Browser</a>
-      <a mat-menu-item href="https://ontoserver.csiro.au/shrimp/?concept=138875005&valueset=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs&fhir=https%3A%2F%2Fontology.nhs.uk%2Fauthoring%2Ffhir" target="_blank">NHS England Ontology Server (Shrimp)</a>
-  </mat-menu>
-  <mat-menu #informatics="matMenu">
+<td-layout class="layout-nav-demo" sidenavWidth="280px">
+    <td-layout-nav
+            navigationRoute="/"
+    >
+        <div td-toolbar-content layout-align="space-between center" flex >
+            <div flex flex-order-xs="2" layout="row" layout-align="center center">
+      <span>Data Capture Form Preview: {{questionnaire?.title}}</span>
+      <span class="example-spacer"></span>
+        <span>
+            <td-file-input mat-icon-button
+                    class="file-input"
+                         #fileInput
+                         [(ngModel)]="file"
+                         (selectFile)="selectFileEvent($event)"
+                         accept=".json">
+                         <mat-icon>upload_file</mat-icon>Upload
+            </td-file-input>
+            <button mat-stroked-button (click)="download()"><mat-icon>download</mat-icon>Save</button>
+            <a mat-icon-button class="example-icon" href="https://github.com/project-wildfyre/questionnaire-viewer" target="_blank">
+                <i class="fa fa-github" style="font-size:24px"></i>
+            </a>
+            <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </span>
 
-    <a mat-menu-item target="_blank" href="https://theprsb.org/standards/">Professional Record Standards Body</a>
-    <a mat-menu-item target="_blank" href="https://ckm.openehr.org/ckm/">openEHR Clinical Knowledge Manager</a>
-      <a mat-menu-item target="_blank" href="https://simplifier.net/guide/clinicalobservations">NHS England Clinical Observations</a>
-      <a mat-menu-item target="_blank" href="https://simplifier.net/guide/uk-core-implementation-guide-stu2">HL7 UK Core STU2</a>
-  </mat-menu>
-</mat-toolbar>
+      <mat-menu #menu="matMenu">
+          <a mat-menu-item target="_blank" href="https://formbuilder.nlm.nih.gov/">NLM Form Builder (US)</a>
+          <a mat-menu-item target="_blank" href="https://project-wildfyre.github.io/formbuilder-lhcforms/">NLM Form Builder (UK Experimental)</a>
+        <button mat-menu-item [matMenuTriggerFor]="tools">Terminology</button>
+          <button mat-menu-item [matMenuTriggerFor]="informatics">Information Models</button>
+          <button mat-menu-item [matMenuTriggerFor]="businessIG">Clinical Process Focused Implementation Guides</button>
+          <button mat-menu-item [matMenuTriggerFor]="technicalIG">Technical Implementation Guides</button>
+      </mat-menu>
+      <mat-menu #businessIG="matMenu">
+        <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/physical-activity/">HL7 Physical Activity (US)</a>
+        <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-sdoh-clinicalcare">HL7 Social Determinents of Health Clinical Care (US)</a>
+      </mat-menu>
+        <mat-menu #technicalIG="matMenu">
+            <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/sdc/">HL7 Structured Data Capture</a>
+            <a mat-menu-item target="_blank" href="https://build.fhir.org/ig/HL7/fhir-ipa/">HL7 Internation Patient Access (Query API)</a>
+        </mat-menu>
+      <mat-menu #tools="matMenu">
+          <a mat-menu-item href="https://termbrowser.nhs.uk/" target="_blank">NHS England SNOMED CT Browser</a>
+          <a mat-menu-item href="https://ontoserver.csiro.au/shrimp/?concept=138875005&valueset=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs&fhir=https%3A%2F%2Fontology.nhs.uk%2Fauthoring%2Ffhir" target="_blank">NHS England Ontology Server (Shrimp)</a>
+      </mat-menu>
+      <mat-menu #informatics="matMenu">
+
+        <a mat-menu-item target="_blank" href="https://theprsb.org/standards/">Professional Record Standards Body</a>
+        <a mat-menu-item target="_blank" href="https://ckm.openehr.org/ckm/">openEHR Clinical Knowledge Manager</a>
+          <a mat-menu-item target="_blank" href="https://simplifier.net/guide/clinicalobservations">NHS England Clinical Observations</a>
+          <a mat-menu-item target="_blank" href="https://simplifier.net/guide/uk-core-implementation-guide-stu2">HL7 UK Core STU2</a>
+      </mat-menu>
+            </div>
+        </div>
 <mat-card>
   <mat-card-content>
 
@@ -89,4 +96,14 @@
     </mat-tab-group>
   </mat-card-content>
 </mat-card>
-
+    </td-layout-nav>
+    <td-layout-footer>
+        <div layout="row" layout-align="start center">
+            Contact &nbsp; <a href="mailto:kevin.mayfield@mayfield-is.co.uk">
+            <i class="fa fa-envelope"></i></a>
+            &nbsp;
+            <a href="https://www.linkedin.com/in/kevin-mayfield-26639716/" class="social-icon si-rounded si-small si-linkedin">
+                linked <i class="fa fa-linkedin"></i></a>
+        </div>
+    </td-layout-footer>
+</td-layout>
