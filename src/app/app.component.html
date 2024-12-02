@@ -11,9 +11,12 @@
                      <mat-icon>upload_file</mat-icon>Upload
         </td-file-input>
         <button mat-stroked-button (click)="download()"><mat-icon>download</mat-icon>Save</button>
-      <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
-      </button>
+        <a mat-icon-button class="example-icon" href="https://github.com/project-wildfyre/questionnaire-viewer" target="_blank">
+            <i class="fa fa-github" style="font-size:24px"></i>
+        </a>
+        <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+            <mat-icon>menu</mat-icon>
+        </button>
     </span>
   <mat-menu #menu="matMenu">
       <a mat-menu-item target="_blank" href="https://formbuilder.nlm.nih.gov/">NLM Form Builder (US)</a>
