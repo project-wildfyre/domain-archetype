@@ -26,18 +26,17 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTooltip} from "@angular/material/tooltip";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatDialogModule} from "@angular/material/dialog";
-
 import {MatMenuModule} from "@angular/material/menu";
-import { FormAnswerComponent } from './form-answer/form-answer.component';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CodeDialogComponent} from "./diaglog/code-dialog/code-dialog.component";
 import {ConceptPopupComponent} from "./diaglog/concept-popup/concept-popup.component";
 import {HL7MappingComponent} from "./diaglog/hl7-mapping/hl7-mapping.component";
-import {QuestionnaireEditComponent} from "./questionnaire-edit/questionnaire-edit.component";
 import {MonacoEditorModule} from "ngx-monaco-editor-v2";
 import {FormsModule} from "@angular/forms";
 import {CovalentFileModule} from "@covalent/core/file";
 import {InfoDiaglogComponent} from "./diaglog/info-diaglog/info-diaglog.component";
+import {FormAnswerComponent} from "./form-detail/form-answer/form-answer.component";
+import {QuestionnaireEditComponent} from "./form-editor/questionnaire-edit.component";
 
 @NgModule({
   declarations: [
