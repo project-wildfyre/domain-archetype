@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CodeableConcept, Observation, ObservationComponent, QuestionnaireItem} from "fhir/r4";
+import {CodeableConcept, Coding, Observation, ObservationComponent, QuestionnaireItem} from "fhir/r4";
 
 @Component({
   selector: 'app-hl7-mapping',
@@ -34,11 +34,48 @@ export class HL7MappingComponent {
     var concept: CodeableConcept = {
       coding : this.item.code
     }
+
+    if (this.item.code !== undefined) {
+      this.item.code.forEach(code => {
+        if (code.extension !== undefined) {
+          code.extension.forEach(ext => {
+            if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract'
+                && ext.valueBoolean !== undefined && ext.valueBoolean) {
+                var newCode: Coding = {
+                  system: code.system,
+                  code: code.code,
+                  display: code.display
+                }
+                concept.coding = [ newCode ]
+            }
+          })
+        }
+      })
+    }
+
+    if (this.item.extension !== undefined) {
+      this.item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract'
+            && ext.valueBoolean !== undefined && ext.valueBoolean) {
+          concept.coding = this.item.code
+        }
+      })
+    }
+
     var observation :Observation = {
       resourceType: "Observation",
       status: "final",
       code: concept
     }
+    if (this.item.extension !== undefined) {
+      this.item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observation-extract-category'
+            && ext.valueCodeableConcept !== undefined ) {
+          observation.category = [ ext.valueCodeableConcept ]
+        }
+      })
+    }
+
     if (this.item.definition?.includes("valueQuantity")) {
       var valueQuantity = {
         "value": 0.0,

@@ -4,12 +4,8 @@ import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
 import {MatDialog} from "@angular/material/dialog";
 import {CodeDialogComponent} from "../diaglog/code-dialog/code-dialog.component";
-import {ConceptPopupComponent} from "../diaglog/concept-popup/concept-popup.component";
 import {HL7MappingComponent} from "../diaglog/hl7-mapping/hl7-mapping.component";
 import {AppService} from "../app.service";
-
-
-
 
 /** Flat node with expandable and level information */
 interface ItemFlatNode {
@@ -36,13 +32,13 @@ export class FormDetailComponent {
   readonly dialog = inject(MatDialog);
   readonly appService = inject(AppService)
   // not used: 'coding',
-  displayedColumns: string[] = ['name', 'type','enabled','answer',  'required', 'repeats',   'fhir'];
+  displayedColumns: string[] = ['name', 'type','enabled','answer',  'required', 'repeats','sdc', 'fhir'];
   questionnaire : any;
 
   private _transformer = (node: QuestionnaireItem, level: number) : ItemFlatNode => {
     return {
       expandable: !!node.item && node.item.length > 0,
-      name: (node.text !== undefined) ? node.text : 'Missing text',
+      name: (node.text !== undefined) ? node.text : '',
       level: level,
       item: node
     };
@@ -129,6 +125,44 @@ export class FormDetailComponent {
     }
     return units;
   }
+  hasObservationExtraction(item: QuestionnaireItem | undefined) {
+    var answer = false;
+    if (item !== undefined && item.code !== undefined) {
+      item.code.forEach(code => {
+        if (code.extension !== undefined) {
+          code.extension.forEach(ext => {
+            if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract'
+                && ext.valueBoolean !== undefined) {
+              answer = ext.valueBoolean;
+            }
+          })
+        }
+      })
+    }
+    if (item !== undefined ) {
+      if (item.extension !== undefined) {
+          item.extension.forEach(ext => {
+            if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract'
+                && ext.valueBoolean !== undefined) {
+              answer = ext.valueBoolean;
+            }
+          })
+        }
+    }
+    return answer;
+  }
 
-
+    getPrePopulate(item: QuestionnaireItem | undefined) {
+      var units = ''
+      if (item !== undefined && item?.extension !== undefined) {
+          item.extension.forEach(ext => {
+            if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod'
+                && ext.valueDuration !== undefined) {
+              console.log(ext)
+              units += 'Extraction Period: ' + ext.valueDuration?.value + ' ' + ext.valueDuration?.code
+            }
+          })
+        }
+        return units;
+    }
 }
