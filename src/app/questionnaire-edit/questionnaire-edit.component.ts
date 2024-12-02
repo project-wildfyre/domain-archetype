@@ -9,9 +9,10 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrl: './questionnaire-edit.component.scss'
 })
 export class QuestionnaireEditComponent {
-  editorOptions = {theme: 'vs-dark', language: 'json'};
+  editorOptions = {theme: 'vs-light', language: 'json'};
 
   monacoEditor: any
+  data: any;
 
   @Input()
   set formDefinition(questionnaire: Questionnaire | undefined) {
@@ -21,12 +22,17 @@ export class QuestionnaireEditComponent {
   readonly = false;
 
   @Output()
-  questionnaireChanged = new EventEmitter();
+  questionnaireChanged = new EventEmitter<Questionnaire>();
 
-  checkType = signal<any | null>(null);
-
-  data: any;
-
+  checkType () {
+    try {
+      var questionnaire = JSON.parse(this.data)
+      this.questionnaireChanged.emit(questionnaire)
+    }
+    catch (e) {
+      console.log((e as Error).message);
+    }
+  }
 
   constructor(private http: HttpClient,
               public dialog: MatDialog

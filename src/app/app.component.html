@@ -1,9 +1,20 @@
 <mat-toolbar>
   <span>Data Capture Form Preview: {{questionnaire?.title}}</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button>
+    <span>
+        <td-file-input mat-icon-button
+                class="file-input"
+                     #fileInput
+                     [(ngModel)]="file"
+                     (selectFile)="selectFileEvent($event)"
+                     accept=".json">
+                     <mat-icon>upload_file</mat-icon>Upload
+        </td-file-input>
+        <button mat-stroked-button (click)="download()"><mat-icon>download</mat-icon>Save</button>
+      <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
   <mat-menu #menu="matMenu">
       <a mat-menu-item target="_blank" href="https://formbuilder.nlm.nih.gov/">NLM Form Builder (US)</a>
       <a mat-menu-item target="_blank" href="https://project-wildfyre.github.io/formbuilder-lhcforms/">NLM Form Builder (UK Experimental)</a>
@@ -34,29 +45,23 @@
 </mat-toolbar>
 <mat-card>
   <mat-card-content>
-      <table [style.width]="'100%;'">
-      <tr>
-          <td> <h3>Code</h3></td>
-          <td>
-          <p *ngFor="let code of questionnaire?.code">
-                <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appSerivce.showSNOMED(code)">{{ appSerivce.getCoded(questionnaire?.code) }} </a>
-                <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appSerivce.getCoded(questionnaire?.code)">LOINC {{ appSerivce.getCoded(questionnaire?.code) }} </a>
-            </p>
-          </td>
-          <td><h3>Publisher</h3></td>
-          <td>
-              {{questionnaire?.publisher}}
-          </td>
-      </tr>
-      <tr>
-        <td><h3>Description</h3></td>
-        <td><td-markdown [content]="getDescription()"></td-markdown></td>
-          <td><h3>Status</h3></td>
-          <td>
-              {{questionnaire?.status}}
-          </td>
-        </tr>
-      </table>
+
+      <div layout="row" layout-align="space-between center">
+          <div>Status: <mat-chip>  {{questionnaire?.status}}</mat-chip></div>
+          <div> Code:
+              <span  *ngFor="let code of questionnaire?.code">
+                    <a mat-button color="primary" *ngIf="code.system == 'http://snomed.info/sct'" (click)="appSerivce.showSNOMED(code)">{{ appSerivce.getCoded(questionnaire?.code) }} </a>
+                    <a *ngIf="code.system == 'http://loinc.org'" target="_blank" [href]="'https://loinc.org/'+appSerivce.getCoded(questionnaire?.code)">LOINC {{ appSerivce.getCoded(questionnaire?.code) }} </a>
+              </span>
+          </div>
+          <div> Publisher: {{questionnaire?.publisher}}</div>
+      </div>
+
+      <div layout="row" layout-align="start center">
+          <td-markdown [content]="getDescription()"></td-markdown>
+      </div>
+
+
     <td-message
       label="Information"
       sublabel="Proof of concept"
@@ -77,7 +82,7 @@
         </mat-tab>
         <mat-tab label="FHIR Questionaire">
              <span *ngIf="currentTab == 2 && questionnaire !== null">
-                 <app-questionnaire-edit [formDefinition]="questionnaire"></app-questionnaire-edit>
+                 <app-questionnaire-edit [formDefinition]="questionnaire" (questionnaireChanged)="updateQuestionnaire($event)"></app-questionnaire-edit>
              </span>
         </mat-tab>
     </mat-tab-group>

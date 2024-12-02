@@ -1,8 +1,8 @@
-<mat-expansion-panel >
+<!--<mat-expansion-panel >
     <mat-expansion-panel-header>
         <mat-panel-title> Answers </mat-panel-title>
 
-    </mat-expansion-panel-header>
+    </mat-expansion-panel-header> -->
     <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="code">
@@ -33,4 +33,4 @@
     <span *ngIf="applyPaginator">
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </span>
-</mat-expansion-panel>
+<!-- </mat-expansion-panel> -->

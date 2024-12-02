@@ -36,6 +36,8 @@ import {HL7MappingComponent} from "./diaglog/hl7-mapping/hl7-mapping.component";
 import {QuestionnaireEditComponent} from "./questionnaire-edit/questionnaire-edit.component";
 import {MonacoEditorModule} from "ngx-monaco-editor-v2";
 import {FormsModule} from "@angular/forms";
+import {CovalentFileModule} from "@covalent/core/file";
+import {InfoDiaglogComponent} from "./diaglog/info-diaglog/info-diaglog.component";
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import {FormsModule} from "@angular/forms";
     ConceptPopupComponent,
     FormAnswerComponent,
     HL7MappingComponent,
-      QuestionnaireEditComponent
+      QuestionnaireEditComponent,
+      InfoDiaglogComponent
   ],
     imports: [
         BrowserModule,
@@ -75,7 +78,8 @@ import {FormsModule} from "@angular/forms";
         MatMenuModule,
         A11yModule,
         MonacoEditorModule.forRoot(),
-        FormsModule
+        FormsModule,
+        CovalentFileModule
     ],
   providers: [
     provideAnimationsAsync()
