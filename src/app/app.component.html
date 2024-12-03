@@ -88,7 +88,7 @@
              </span>
         </mat-tab>
 
-        <mat-tab label="FHIR Questionaire">
+        <mat-tab label="FHIR Questionnaire">
              <span *ngIf="currentTab == 2 && questionnaire !== null">
                  <app-questionnaire-edit [formDefinition]="questionnaire" (questionnaireChanged)="updateQuestionnaire($event)"></app-questionnaire-edit>
              </span>
