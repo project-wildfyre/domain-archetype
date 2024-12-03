@@ -1,0 +1,266 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "UKCore-Questionnaire-Prescreen-Example",
+  "url": "https://example.com/base/Questionnaire/UKCore-Questionnaire-Prescreen-Example",
+  "identifier": [
+    {
+      "value": "dbba41f5-2905-4a5f-baba-e5987cbd9cca",
+      "assigner": {
+        "reference": "Organization/UKCore-Organization-LeedsTeachingHospital-Example"
+      }
+    }
+  ],
+  "status": "active",
+  "experimental": false,
+  "subjectType": [
+    "Patient"
+  ],
+  "date": "2021-02-15T13:50:00+00:00",
+  "publisher": "Example NHS Trust",
+  "contact": [
+    {
+      "name": "Leeds Teaching Hospitals NHS Trust",
+      "telecom": [
+        {
+          "system": "phone",
+          "value": "01132433144",
+          "use": "work",
+          "rank": 1
+        }
+      ]
+    }
+  ],
+  "purpose": "A test pre screening questionnaire",
+  "effectivePeriod": {
+    "start": "2021-02-15T13:50:00+00:00",
+    "end": "2026-05-15T13:50:00+00:00"
+  },
+  "item": [
+    {
+      "type": "boolean",
+      "extension": [
+        {
+          "valueBoolean": true,
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
+          "valueDuration": {
+            "value": 5,
+            "unit": "years",
+            "system": "http://unitsofmeasure.org",
+            "code": "a"
+          }
+        }
+      ],
+      "linkId": "1",
+      "text": "Do you have a pacemaker or any other implanted medical device ?"
+    },
+    {
+      "item": [
+        {
+          "type": "boolean",
+          "extension": [
+            {
+              "valueBoolean": true,
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
+              "valueDuration": {
+                "value": 2,
+                "unit": "years",
+                "system": "http://unitsofmeasure.org",
+                "code": "a"
+              }
+            }
+          ],
+          "linkId": "2.1",
+          "code": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "14106009"
+            }
+          ],
+          "text": "Pacemaker"
+        },
+        {
+          "type": "boolean",
+          "extension": [
+            {
+              "valueBoolean": true,
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
+              "valueDuration": {
+                "value": 2,
+                "unit": "years",
+                "system": "http://unitsofmeasure.org",
+                "code": "a"
+              }
+            }
+          ],
+          "linkId": "2.2",
+          "code": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "450657002"
+            }
+          ],
+          "text": "Insulin Pump"
+        },
+        {
+          "type": "string",
+          "linkId": "2.3",
+          "text": "Other"
+        }
+      ],
+      "type": "choice",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "2",
+      "text": "If yes, please specify which type(s) of medical device implant you have.",
+      "enableWhen": [
+        {
+          "question": "1",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ],
+      "required": false
+    },
+    {
+      "type": "string",
+      "linkId": "3",
+      "text": "Do you need additional support to attend screening ?"
+    },
+    {
+      "type": "boolean",
+      "linkId": "4",
+      "text": "Are you pregnant or breastfeeding ?"
+    },
+    {
+      "type": "boolean",
+      "linkId": "5",
+      "text": "Are you under the care of a breast consultant ?"
+    },
+    {
+      "type": "boolean",
+      "extension": [
+        {
+          "valueBoolean": true,
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
+          "valueDuration": {
+            "value": 6,
+            "unit": "months",
+            "system": "http://unitsofmeasure.org",
+            "code": "mo"
+          }
+        }
+      ],
+      "linkId": "6",
+      "code": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "71651007"
+        }
+      ],
+      "text": "Have you had a mammogram in the last 6 months ?"
+    },
+    {
+      "type": "boolean",
+      "extension": [
+        {
+          "valueBoolean": true,
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
+          "valueDuration": {
+            "value": 10,
+            "unit": "years",
+            "system": "http://unitsofmeasure.org",
+            "code": "a"
+          }
+        }
+      ],
+      "linkId": "7",
+      "code": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "254837009"
+        }
+      ],
+      "text": "Have you had breast cancer ?"
+    },
+    {
+      "linkId": "8",
+      "text": "Is english your first language ?",
+      "type": "boolean"
+    },
+    {
+      "type": "choice",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "9",
+      "code": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "129714008"
+        }
+      ],
+      "text": "What is the image read finding of the initial screening mammography ?",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "168749009",
+            "display": "Mammography normal (finding)"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "168750009",
+            "display": "Mammography abnormal (finding)"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "134301000119104",
+            "display": "Inconclusive mammography finding (finding)"
+          }
+        }
+      ]
+    }
+  ]
+}
