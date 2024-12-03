@@ -4,7 +4,7 @@ import {MatTabChangeEvent} from "@angular/material/tabs";
 import {Questionnaire, QuestionnaireItem} from "fhir/r4";
 import {AppService} from "./app.service";
 import {MatDialog} from "@angular/material/dialog";
-import {InfoDiaglogComponent} from "./diaglog/info-diaglog/info-diaglog.component";
+import {InfoDiaglogComponent} from "./dialog/info-diaglog/info-diaglog.component";
 
 
 
@@ -31,7 +31,9 @@ export class AppComponent implements OnInit {
     this.downloadQuestionnaire(this.appSerivce.defaultQuestionnaire)
     this.route.queryParams.subscribe(params => {
         const questionnairePath = params['q'];
+        console.log('url = '+questionnairePath)
         if (questionnairePath !== null) {
+          this.questionnaire = undefined
           this.downloadQuestionnaire(questionnairePath)
         }
       }
@@ -124,4 +126,5 @@ export class AppComponent implements OnInit {
     }
   }
 
+  protected readonly String = String;
 }

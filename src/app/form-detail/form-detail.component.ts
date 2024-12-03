@@ -3,8 +3,8 @@ import {Coding, Questionnaire, QuestionnaireItem} from "fhir/r4";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
 import {MatDialog} from "@angular/material/dialog";
-import {CodeDialogComponent} from "../diaglog/code-dialog/code-dialog.component";
-import {HL7MappingComponent} from "../diaglog/hl7-mapping/hl7-mapping.component";
+import {CodeDialogComponent} from "../dialog/code-dialog/code-dialog.component";
+import {HL7MappingComponent} from "../dialog/hl7-mapping/hl7-mapping.component";
 import {AppService} from "../app.service";
 
 /** Flat node with expandable and level information */
@@ -158,7 +158,6 @@ export class FormDetailComponent {
           item.extension.forEach(ext => {
             if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod'
                 && ext.valueDuration !== undefined) {
-              console.log(ext)
               units += 'Extraction Period: ' + ext.valueDuration?.value + ' ' + ext.valueDuration?.code
             }
           })

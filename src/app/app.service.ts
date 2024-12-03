@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Coding, QuestionnaireItem} from "fhir/r4";
-import {ConceptPopupComponent} from "./diaglog/concept-popup/concept-popup.component";
+import {ConceptPopupComponent} from "./dialog/concept-popup/concept-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
