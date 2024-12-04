@@ -9,7 +9,7 @@ import {QuestionnaireItem, QuestionnaireItemAnswerOption} from "fhir/r4";
 })
 export class FormAnswerComponent {
   applyPaginator: boolean = false;
-  displayedColumns: string[] = [ 'display', 'code',  'codesystem'];
+  displayedColumns: string[] = [ 'display', 'code'];
   // @ts-ignore
   dataSource: MatTableDataSource<QuestionnaireItemAnswerOption>;
   item: QuestionnaireItem | undefined;

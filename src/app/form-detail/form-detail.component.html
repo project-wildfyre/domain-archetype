@@ -1,7 +1,7 @@
 <table mat-table [dataSource]="dataSource" >
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>
-            <span [style.paddingLeft.px]="40"> Question/Name </span>
+            <span [style.paddingLeft.px]="40"> Question </span>
         </th>
         <td mat-cell *matCellDef="let node">
             <table >
@@ -87,7 +87,7 @@
         </td>
     </ng-container>
     <ng-container matColumnDef="sdc">
-        <th mat-header-cell *matHeaderCellDef> SDC </th>
+        <th mat-header-cell *matHeaderCellDef> Pre-Population /<br/> Data Extraction (SDC) </th>
         <td mat-cell *matCellDef="let node">
             {{getPrePopulate(node.item)}}
             <span *ngIf="hasObservationExtraction(node.item)">

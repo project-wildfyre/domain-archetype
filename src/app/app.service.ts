@@ -8,7 +8,8 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class AppService {
   readonly dialog = inject(MatDialog);
-  defaultQuestionnaire: string = 'https://raw.githubusercontent.com/project-wildfyre/questionnaire-viewer/refs/heads/main/QuestionnaireExamples/Questionnaire-questionnaire-sdc-profile-example-framingham-hchd-lhc.json';
+  //defaultQuestionnaire: string = 'https://raw.githubusercontent.com/project-wildfyre/questionnaire-viewer/refs/heads/main/QuestionnaireExamples/Questionnaire-questionnaire-sdc-profile-example-framingham-hchd-lhc.json';
+  defaultQuestionnaire: string = 'https://raw.githubusercontent.com/project-wildfyre/questionnaire-viewer/refs/heads/main/QuestionnaireExamples/Questionnaire-Prescreen-Example.json';
   constructor() { }
 
   getCoded(code : Coding | undefined) {

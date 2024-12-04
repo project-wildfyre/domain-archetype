@@ -158,7 +158,10 @@ export class FormDetailComponent {
           item.extension.forEach(ext => {
             if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod'
                 && ext.valueDuration !== undefined) {
-              units += 'Extraction Period: ' + ext.valueDuration?.value + ' ' + ext.valueDuration?.code
+              var code = ext.valueDuration?.code
+              if (code === 'a') code = 'year(s)'
+              if (code === 'mo') code = 'month(s)'
+              units += 'Pre Population Period: ' + ext.valueDuration?.value + ' ' + code
             }
           })
         }
