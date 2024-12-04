@@ -37,6 +37,23 @@
   },
   "item": [
     {
+      "extension": [
+        {
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
+          "valueExpression" : {
+            "name" : "implant",
+            "language" : "application/x-fhir-query",
+            "expression" : "Procedure?patient={{%patient.id}}&code=25267002,443263006"
+          }
+        },
+        {
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression" : {
+            "language" : "text/fhirpath",
+            "expression" : "exists(%implant)"
+          }
+        }
+      ],
       "type": "boolean",
       "linkId": "1",
       "text": "Do you have a pacemaker or any other implanted medical device ?"
@@ -45,21 +62,6 @@
       "item": [
         {
           "type": "boolean",
-          "extension": [
-            {
-              "valueBoolean": true,
-              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
-            },
-            {
-              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
-              "valueDuration": {
-                "value": 2,
-                "unit": "years",
-                "system": "http://unitsofmeasure.org",
-                "code": "a"
-              }
-            }
-          ],
           "linkId": "2.1",
           "code": [
             {
@@ -144,16 +146,18 @@
       "type": "boolean",
       "extension": [
         {
-          "valueBoolean": true,
-          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
+          "valueExpression" : {
+            "name" : "mammogram",
+            "language" : "application/x-fhir-query",
+            "expression" : "Condition?patient={{%patient.id}}&code=http://snomed.info/sct|71651007"
+          }
         },
         {
-          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
-          "valueDuration": {
-            "value": 6,
-            "unit": "months",
-            "system": "http://unitsofmeasure.org",
-            "code": "mo"
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression" : {
+            "language" : "text/fhirpath",
+            "expression" : "exists(%mammogram)"
           }
         }
       ],
@@ -173,25 +177,16 @@
         {
           "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
           "valueExpression" : {
-            "name" : "mammogram",
+            "name" : "breastcancer",
             "language" : "application/x-fhir-query",
-            "expression" : "Procedure?patient={{%patient.id}}&code=http://snomed.info/sct|254837009"
+            "expression" : "Condition?patient={{%patient.id}}&code=http://snomed.info/sct|254837009"
           }
         },
         {
           "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
           "valueExpression" : {
             "language" : "text/fhirpath",
-            "expression" : "exists(%mammogram)"
-          }
-        },
-        {
-          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
-          "valueDuration": {
-            "value": 6,
-            "unit": "month",
-            "system": "http://unitsofmeasure.org",
-            "code": "mo"
+            "expression" : "exists(%breastcancer)"
           }
         }
       ],
