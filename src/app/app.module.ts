@@ -28,7 +28,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {A11yModule} from '@angular/cdk/a11y';
 import {CodeDialogComponent} from "./dialog/code-dialog/code-dialog.component";
 import {ConceptPopupComponent} from "./dialog/concept-popup/concept-popup.component";
-import {HL7MappingComponent} from "./dialog/hl7-mapping/hl7-mapping.component";
+import {DataExtractComponent} from "./dialog/data-extraction/data-extract.component";
 import {MonacoEditorModule} from "ngx-monaco-editor-v2";
 import {FormsModule} from "@angular/forms";
 import {CovalentFileModule} from "@covalent/core/file";
@@ -38,6 +38,7 @@ import {QuestionnaireEditComponent} from "./form-editor/questionnaire-edit.compo
 import {LhcFormComponent} from "./form-preview/lhc-form.component";
 import {FormDetailNodeComponent} from "./form-detail/form-detail-node/form-detail-node.component";
 import {ClinicalCodingComponent} from "./widget/clinical-coding/clinical-coding.component";
+import {DataPopulateComponent} from "./dialog/data-populate/data-populate.component";
 
 
 @NgModule({
@@ -49,10 +50,11 @@ import {ClinicalCodingComponent} from "./widget/clinical-coding/clinical-coding.
     CodeDialogComponent,
     ConceptPopupComponent,
     FormAnswerComponent,
-    HL7MappingComponent,
+    DataExtractComponent,
       QuestionnaireEditComponent,
       InfoDiaglogComponent,
-      ClinicalCodingComponent
+      ClinicalCodingComponent,
+      DataPopulateComponent
   ],
     imports: [
         BrowserModule,

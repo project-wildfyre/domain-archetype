@@ -1,12 +1,13 @@
 import {Component, inject, Input} from '@angular/core';
-import {Coding, Parameters, Questionnaire, QuestionnaireItem} from "fhir/r4";
+import {Coding, Extension, Parameters, Questionnaire, QuestionnaireItem} from "fhir/r4";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
 import {MatDialog} from "@angular/material/dialog";
 import {CodeDialogComponent} from "../dialog/code-dialog/code-dialog.component";
-import {HL7MappingComponent} from "../dialog/hl7-mapping/hl7-mapping.component";
+import {DataExtractComponent} from "../dialog/data-extraction/data-extract.component";
 import {AppService} from "../app.service";
 import {HttpClient} from "@angular/common/http";
+import {DataPopulateComponent} from "../dialog/data-populate/data-populate.component";
 
 /** Flat node with expandable and level information */
 interface ItemFlatNode {
@@ -71,8 +72,18 @@ export class FormDetailComponent {
       console.log('The dialog was closed');
     });
   }
-  showMapping(item: QuestionnaireItem | undefined) {
-    const dialogRef = this.dialog.open(HL7MappingComponent, {
+  showExtraction(item: QuestionnaireItem | undefined) {
+    const dialogRef = this.dialog.open(DataExtractComponent, {
+      data: item,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  showPopulation(item: QuestionnaireItem | undefined) {
+    const dialogRef = this.dialog.open(DataPopulateComponent, {
       data: item,
     });
 
@@ -169,6 +180,18 @@ export class FormDetailComponent {
         return units;
     }
 
+  hasObservationPopulate(item: QuestionnaireItem | undefined) {
+    var hasExt = false
+    if (item !== undefined && item?.extension !== undefined) {
+      item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod') {
+         hasExt = true
+        }
+      })
+    }
+    return hasExt;
+  }
+
   getCategory(item: QuestionnaireItem | undefined) {
     var category = ''
     if (item !== undefined && item?.extension !== undefined) {
@@ -182,5 +205,57 @@ export class FormDetailComponent {
       })
     }
     return category;
+  }
+
+  hasDefinitionPopulate(item: QuestionnaireItem | undefined) {
+    var hasExt = false
+    if (item !== undefined && item?.extension !== undefined) {
+      item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext'
+        || ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression'
+            || ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-candidateExpression'
+        || ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext') {
+          hasExt = true
+        }
+      })
+    }
+    return hasExt;
+  }
+
+  hasDefinitionExtraction(item: QuestionnaireItem | undefined) {
+    var hasExt = false
+    if (item?.definition !== undefined) return true;
+    if (item !== undefined && item?.extension !== undefined) {
+      item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext') {
+          hasExt = true
+        }
+      })
+    }
+    return hasExt;
+  }
+
+  getExtractionContext(item: QuestionnaireItem) {
+    var extension = this.getExtension('http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext', item)
+    var text = ''
+    if (extension !== null && extension?.valueExpression !== undefined) {
+      if (extension.valueExpression.expression !== undefined) text += "- Expression: " + extension.valueExpression.expression + ' \n'
+      if (extension.valueExpression.name !== undefined) text += "- Name: " + extension.valueExpression.name+ ' \n'
+      if (extension.valueExpression.description !== undefined) text += "- Description: " + extension.valueExpression.description + ' \n'
+      if (extension.valueExpression.language !== undefined) text += "- Language: " + extension.valueExpression.language + ' \n'
+    }
+    if (extension !== null && extension?.valueCode !== undefined) {
+      if (extension.valueCode !== undefined) text += "- Code: " + extension.valueCode + ' \n'
+    }
+    return text;
+  }
+  getExtension(uri: string, item: QuestionnaireItem): Extension | undefined {
+    var extension : Extension | undefined
+    if (item !== undefined && item.extension !== undefined) {
+      item.extension.forEach( ext => {
+        if (ext.url === uri ) extension = ext;
+      })
+    }
+    return extension
   }
 }

@@ -4,11 +4,11 @@ import {CodeableConcept, Coding, Observation, ObservationComponent, Questionnair
 
 @Component({
   selector: 'app-hl7-mapping',
-  templateUrl: './hl7-mapping.component.html',
-  styleUrl: './hl7-mapping.component.scss'
+  templateUrl: './data-extract.component.html',
+  styleUrl: './data-extract.component.scss'
 })
-export class HL7MappingComponent {
-  readonly dialogRef = inject(MatDialogRef<HL7MappingComponent>);
+export class DataExtractComponent {
+  readonly dialogRef = inject(MatDialogRef<DataExtractComponent>);
   readonly item = inject<QuestionnaireItem>(MAT_DIALOG_DATA);
 
   getUnits() {

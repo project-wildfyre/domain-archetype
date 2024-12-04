@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Expression based Extraction</h2>
+<mat-dialog-content>
+    For more details see <a href="https://build.fhir.org/ig/HL7/sdc/populate.html#expression-based-population" target="_blank">HL7 SDC - Expression-based Population</a>
+    <table>
+        <tr>
+            <td>Launch Context <a href="https://build.fhir.org/ig/HL7/sdc/StructureDefinition-sdc-questionnaire-launchContext.html" target="_blank"><mat-icon color="primary">info</mat-icon></a></td>
+            <td>{{getLaunch()}}</td>
+        </tr>
+        <tr>
+            <td>Population Context <a href="https://build.fhir.org/ig/HL7/sdc/StructureDefinition-sdc-questionnaire-itemPopulationContext.html" target="_blank"><mat-icon color="primary">info</mat-icon></a></td>
+            <td>
+                <td-markdown [content]="getPopulationContext()"></td-markdown>
+            </td>
+        </tr>
+        <tr>
+            <td>Initial Expression <a href="https://build.fhir.org/ig/HL7/sdc/StructureDefinition-sdc-questionnaire-initialExpression.html" target="_blank"><mat-icon color="primary">info</mat-icon></a></td>
+            <td>
+            <td-markdown [content]="getInitialExpression()"></td-markdown>
+            </td>
+        </tr>
+        <tr>
+            <td>Candidate Expression <a href="https://build.fhir.org/ig/HL7/sdc/StructureDefinition-sdc-questionnaire-candidateExpression.html" target="_blank"><mat-icon color="primary">info</mat-icon></a></td>
+            <td>
+                <td-markdown [content]="getCandidateExpression()"></td-markdown>
+            </td>
+        </tr>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button color = "primary" mat-button mat-dialog-close cdkFocusInitial>OK</button>
+</mat-dialog-actions>
