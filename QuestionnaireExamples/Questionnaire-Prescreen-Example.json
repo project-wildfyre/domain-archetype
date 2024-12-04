@@ -38,12 +38,6 @@
   "item": [
     {
       "type": "boolean",
-      "extension": [
-        {
-          "valueBoolean": true,
-          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
-        }
-      ],
       "linkId": "1",
       "text": "Do you have a pacemaker or any other implanted medical device ?"
     },
@@ -70,7 +64,8 @@
           "code": [
             {
               "system": "http://snomed.info/sct",
-              "code": "14106009"
+              "code": "25267002",
+              "display": "Insertion of intracardiac pacemaker"
             }
           ],
           "text": "Pacemaker"
@@ -78,10 +73,6 @@
         {
           "type": "boolean",
           "extension": [
-            {
-              "valueBoolean": true,
-              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
-            },
             {
               "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
               "valueDuration": {
@@ -96,7 +87,8 @@
           "code": [
             {
               "system": "http://snomed.info/sct",
-              "code": "450657002"
+              "code": "443263006",
+              "display": "Insertion of insulin pump"
             }
           ],
           "text": "Insulin Pump"
