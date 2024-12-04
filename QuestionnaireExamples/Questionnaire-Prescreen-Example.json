@@ -179,16 +179,27 @@
       "type": "boolean",
       "extension": [
         {
-          "valueBoolean": true,
-          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationExtract"
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
+          "valueExpression" : {
+            "name" : "mammogram",
+            "language" : "application/x-fhir-query",
+            "expression" : "Procedure?patient={{%patient.id}}&code=http://snomed.info/sct|254837009"
+          }
+        },
+        {
+          "url" : "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression" : {
+            "language" : "text/fhirpath",
+            "expression" : "exists(%mammogram)"
+          }
         },
         {
           "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observationLinkPeriod",
           "valueDuration": {
-            "value": 10,
-            "unit": "years",
+            "value": 6,
+            "unit": "month",
             "system": "http://unitsofmeasure.org",
-            "code": "a"
+            "code": "mo"
           }
         }
       ],

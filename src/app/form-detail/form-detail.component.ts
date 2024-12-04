@@ -1,11 +1,12 @@
 import {Component, inject, Input} from '@angular/core';
-import {Coding, Questionnaire, QuestionnaireItem} from "fhir/r4";
+import {Coding, Parameters, Questionnaire, QuestionnaireItem} from "fhir/r4";
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
 import {MatDialog} from "@angular/material/dialog";
 import {CodeDialogComponent} from "../dialog/code-dialog/code-dialog.component";
 import {HL7MappingComponent} from "../dialog/hl7-mapping/hl7-mapping.component";
 import {AppService} from "../app.service";
+import {HttpClient} from "@angular/common/http";
 
 /** Flat node with expandable and level information */
 interface ItemFlatNode {
@@ -31,6 +32,7 @@ export class FormDetailComponent {
   }
   readonly dialog = inject(MatDialog);
   readonly appService = inject(AppService)
+
   // not used: 'coding',
   displayedColumns: string[] = ['name', 'type','enabled','answer',  'required', 'repeats','sdc', 'fhir'];
   questionnaire : any;
@@ -56,8 +58,6 @@ export class FormDetailComponent {
   );
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-
 
 
   hasChild = (_: number, node: ItemFlatNode) => node.expandable;
@@ -161,10 +161,26 @@ export class FormDetailComponent {
               var code = ext.valueDuration?.code
               if (code === 'a') code = 'year(s)'
               if (code === 'mo') code = 'month(s)'
-              units += 'Pre Population Period: ' + ext.valueDuration?.value + ' ' + code
+              units += 'Pre Population: ' + ext.valueDuration?.value + ' ' + code
             }
           })
         }
+
         return units;
     }
+
+  getCategory(item: QuestionnaireItem | undefined) {
+    var category = ''
+    if (item !== undefined && item?.extension !== undefined) {
+      item.extension.forEach(ext => {
+        if (ext.url == 'http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-observation-extract-category'
+            && ext.valueCodeableConcept !== undefined
+            && ext.valueCodeableConcept.coding !== undefined) {
+
+          category = 'Extraction Category: ' + ext.valueCodeableConcept.coding[0].code
+        }
+      })
+    }
+    return category;
+  }
 }
