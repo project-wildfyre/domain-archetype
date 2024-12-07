@@ -172,7 +172,7 @@ export class FormDetailComponent {
               var code = ext.valueDuration?.code
               if (code === 'a') code = 'year(s)'
               if (code === 'mo') code = 'month(s)'
-              units += 'Pre Population: ' + ext.valueDuration?.value + ' ' + code
+              units += ext.valueDuration?.value + ' ' + code
             }
           })
         }
@@ -247,6 +247,7 @@ export class FormDetailComponent {
     if (extension !== null && extension?.valueCode !== undefined) {
       if (extension.valueCode !== undefined) text += "- Code: " + extension.valueCode + ' \n'
     }
+    if (text === '') return 'None';
     return text;
   }
   getExtension(uri: string, item: QuestionnaireItem): Extension | undefined {
