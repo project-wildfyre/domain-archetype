@@ -45,6 +45,7 @@ export class AppComponent implements OnInit {
       if (data.type == 'cors') {
         data.json().then(data2 => {
           this.questionnaire = this.fixEcl(data2)
+          console.log("Loaded Questionnaire")
         })
       }
     })

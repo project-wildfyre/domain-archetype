@@ -74,25 +74,25 @@
       color="primary"
       icon="information"
     ></td-message>
-
-    <mat-tab-group (selectedTabChange)="changedTab($event)">
-        <mat-tab label="Summary">
-            <span *ngIf="currentTab == 0 && questionnaire !== null">
-                <app-form-detail [formDefinition]="questionnaire"></app-form-detail>
-            </span>
-        </mat-tab>
-        <mat-tab label="Preview">
-             <span *ngIf="currentTab == 1 && questionnaire !== null">
-                 <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
-             </span>
-        </mat-tab>
-
-        <mat-tab label="FHIR Questionnaire">
-             <span *ngIf="currentTab == 2 && questionnaire !== null">
-                 <app-questionnaire-edit [formDefinition]="questionnaire" (questionnaireChanged)="updateQuestionnaire($event)"></app-questionnaire-edit>
-             </span>
-        </mat-tab>
-    </mat-tab-group>
+    <span *ngIf="questionnaire !==null">
+        <mat-tab-group (selectedTabChange)="changedTab($event)">
+            <mat-tab label="Preview">
+                 <span *ngIf="currentTab == 0">
+                     <app-lhc-form [formDefinition]="questionnaire"></app-lhc-form>
+                 </span>
+            </mat-tab>
+            <mat-tab label="Summary">
+                <span *ngIf="currentTab == 1">
+                    <app-form-detail [formDefinition]="questionnaire"></app-form-detail>
+                </span>
+            </mat-tab>
+            <mat-tab label="FHIR Questionnaire">
+                 <span *ngIf="currentTab == 2">
+                     <app-questionnaire-edit [formDefinition]="questionnaire" (questionnaireChanged)="updateQuestionnaire($event)"></app-questionnaire-edit>
+                 </span>
+            </mat-tab>
+        </mat-tab-group>
+    </span>
   </mat-card-content>
 </mat-card>
     </td-layout-nav>

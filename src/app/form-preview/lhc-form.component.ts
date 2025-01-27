@@ -23,7 +23,14 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
 
   @Input()
   set formDefinition(questionnaire: Questionnaire | undefined) {
+    console.log("Setting Questionnaire")
+    if (questionnaire == undefined) {
+      console.log("Questionnaire is undefined")
+    }
     this.questionnaire = questionnaire;
+    if (this.questionnaire !== null) {
+      this.populateQuestionnaireNoPopulation()
+    }
   }
 
   constructor(
@@ -41,12 +48,14 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    console.log("After View Init")
     if (this.questionnaire !== null) {
       this.populateQuestionnaireNoPopulation()
     }
   }
 
   populateQuestionnaireNoPopulation() {
+    console.log("Populating Questionnaire")
     LForms.Util.setFHIRContext(this.ctx)
     console.log(this.ctx)
     let formDef = LForms.Util.convertFHIRQuestionnaireToLForms(this.questionnaire, "R4");
