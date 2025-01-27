@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   file: any;
 
   ngOnInit() {
-    this.downloadQuestionnaire(this.appSerivce.defaultQuestionnaire)
+   // this.downloadQuestionnaire(this.appSerivce.defaultQuestionnaire)
     this.route.queryParams.subscribe(params => {
         const questionnairePath = params['q'];
         console.log('url = '+questionnairePath)

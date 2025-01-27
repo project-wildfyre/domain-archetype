@@ -28,7 +28,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
       console.log("Questionnaire is undefined")
     }
     this.questionnaire = questionnaire;
-    if (this.questionnaire !== null) {
+    if (this.questionnaire !== undefined) {
       this.populateQuestionnaireNoPopulation()
     }
   }
@@ -49,7 +49,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log("After View Init")
-    if (this.questionnaire !== null) {
+    if (this.questionnaire !== undefined) {
       this.populateQuestionnaireNoPopulation()
     }
   }
