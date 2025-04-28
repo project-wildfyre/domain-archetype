@@ -1,4 +1,4 @@
-[Questionnaire Viewer](https://project-wildfyre.github.io/questionnaire-viewer/)
+[Domain Archetype](https://project-wildfyre.github.io/domain-archetype/)
 
 This is influenced and uses components from [Lister Hill National Center for Biomedical Communications - questionnaire-viewer](https://github.com/LHNCBC/questionnaire-viewer)
 
