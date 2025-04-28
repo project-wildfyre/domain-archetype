@@ -19,7 +19,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
   @ViewChild('myFormContainer', {static: false}) mydiv: ElementRef | undefined;
 
   questionnaire : any;
-  private sdcServer: string = 'https://3cdzg7kbj4.execute-api.eu-west-2.amazonaws.com/poc/events/FHIR/R4' ;
+  private sdcServer: string = 'https://lforms-fhir.nlm.nih.gov/baseR4' ;
 
   @Input()
   set formDefinition(questionnaire: Questionnaire | undefined) {

@@ -4,7 +4,7 @@
     >
         <div td-toolbar-content layout-align="space-between center" flex >
             <div flex flex-order-xs="2" layout="row" layout-align="center center">
-      <span>Data Capture Form Preview: {{questionnaire?.title}}</span>
+      <span>Domain Archetype: {{questionnaire?.title}}</span>
       <span class="example-spacer"></span>
         <span>
             <td-file-input mat-icon-button
@@ -16,7 +16,7 @@
                          <mat-icon>upload_file</mat-icon>Upload
             </td-file-input>
             <button mat-stroked-button (click)="download()"><mat-icon>download</mat-icon>Save</button>
-            <a mat-icon-button class="example-icon" href="https://github.com/project-wildfyre/questionnaire-viewer" target="_blank">
+            <a mat-icon-button class="example-icon" href="https://github.com/project-wildfyre/domain-archetype" target="_blank">
                 <i class="fa fa-github" style="font-size:24px"></i>
             </a>
             <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
