@@ -34,9 +34,9 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
   }
 
   constructor(
-   
+
       private http: HttpClient
-      
+
   ) {
   }
 
@@ -68,7 +68,7 @@ export class LhcFormComponent implements OnInit, AfterViewInit {
 
       formDef = LForms.Util.mergeFHIRDataIntoLForms('QuestionnaireResponse', qr, newFormData, "R4");
 
-      LForms.Util.addFormToPage(formDef, this.mydiv?.nativeElement, {prepopulate: false});
+      LForms.Util.addFormToPage(formDef, this.mydiv?.nativeElement, {prepopulate: false, showQuestionCode: true});
     } catch (e) {
       console.log(e)
       formDef = null;
